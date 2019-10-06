@@ -1,0 +1,43 @@
+<resources>
+    <dimen name="shr_product_grid_reveal_height">200dp</dimen>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="app_name">Dnail</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_sologan_intro">Khám phá vẻ đẹp trong bạn...</string>
+    <string name="text_bat_dau_trai_nghiem">Bắt đầu trải nghiệm cùng Dnail</string>
+    <string name="text_nhap_sdt">Nhập số điện thoại của bạn</string>
+    <string name="text_nhap_ma_otp">Nhập mã OTP</string>
+    <string name="text_ma_otp_gui_toi_So">Mã OTP sẽ được gửi tới số</string>
+    <string name="text_tiep">Tiếp theo</string>
+    <string name="text_gui_lai_ma_sau">Gửi lại mã OTP sau</string>
+    <string name="text_hoan_thien_dang_ky">Hoàn thiện đăng ký</string>
+    <string name="text_day_la_buoc_cuoi">Đây là bước cuối cùng để trải nhiệm app</string>
+    <string name="text_hoan_thanh">Hoàn thành</string>
+    <string name="text_ho_ten">Họ tên</string>
+    <string name="text_email">Email</string>
+    <string name="text_ma_gioi_thieu">Mã giới thiệu</string>
+    <string name="text_sdt_trong">Số điện thoại trống!</string>
+
+    <string name="text_sdt_khong_dung">Số điện thoại không đúng!</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="text_trang_chu">Trang chủ</string>
+    <string name="text_lich_su">Lịch sử giao dịch</string>
+    <string name="text_khuyen_mai">Khuyến mãi</string>
+    <string name="text_khac">Khác</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+</resources>

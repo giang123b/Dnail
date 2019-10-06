@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/intro_fragment"
+    android:background="@color/not_white"
+    tools:context=".IntroFragment">
+
+    <ImageView
+        android:layout_width="@dimen/layout_logo_intro"
+        android:layout_height="@dimen/layoutheight_logo_intro"
+        android:src="@drawable/diamond"
+        android:layout_gravity="top|center"
+        android:layout_marginTop="@dimen/layout_marginTop_logo_intro"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_sologan_intro"
+        android:textSize="@dimen/textsize_sologan"
+        android:layout_gravity="center"
+        android:textColor="@color/pink_slogan"
+        android:textStyle="bold"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_bat_dau_trai_nghiem"
+        android:textSize="@dimen/textsize_bat_dau_trai_nghiem"
+        android:textColor="@color/black"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/layout_marginTop_bat_dau_trai_nghiem"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|top"
+        >
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_telephone"
+            android:layout_gravity="top"
+            android:layout_marginTop="@dimen/layout_marginTop_logo_intro"
+            />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:hint="@string/text_nhap_sdt"
+            android:textSize="@dimen/textsize_sologan"
+            android:layout_gravity="center|bottom"
+            android:inputType="number"
+            android:background="@color/white"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_next_intro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_round"
+        android:text="@string/text_tiep"
+        android:layout_gravity="bottom|center"
+        android:padding="@dimen/padding_button"
+        android:layout_marginTop="@dimen/marginTop_btn_tiep_theo"
+        />
+</LinearLayout>

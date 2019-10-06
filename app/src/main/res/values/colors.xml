@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#F4A2A6</color>
+    <color name="colorPrimaryDark">#c07277</color>
+    <color name="colorAccent">#F4A2A6</color>
+    <color name="black">#000000</color>
+    <color name="pink_slogan">#D81B60</color>
+    <color name="pink_theme">#F4A2A6</color>
+    <color name="siliver">#A0A0A0</color>
+    <color name="white">#ffff</color>
+    <color name="not_white">#F8F7F7</color>
+</resources>
