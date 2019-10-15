@@ -68,7 +68,7 @@ public class IntroFragment extends Fragment {
     }
 
     private boolean isPhoneValid(@Nullable Editable text) {
-        return text != null && text.length() >= 1;
+        return text != null && text.length() >= 0;
     }
 
 }

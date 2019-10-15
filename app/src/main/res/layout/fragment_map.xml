@@ -5,12 +5,185 @@
     android:layout_height="match_parent"
     tools:context=".OtherFeaturesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:textSize="30sp"
-        android:text="Map" />
+        android:orientation="vertical"
+        android:gravity="center|bottom"
+        >
+<!--        2 thanh chon dia diem, thoi gian-->
+        <LinearLayout
+            android:id="@+id/lnNhapThoiGianViTri"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center|bottom"
+            >
+            <TextView
+                android:id="@+id/txtNhapViTri"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/boder_edittext"
+                android:hint="@string/text_nhap_dia_chi_tho_den_lam"
+                android:drawableLeft="@drawable/ic_add_location_black_24dp"
+                />
+            <TextView
+                android:id="@+id/txtNhapThoiGian"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/boder_edittext"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="30dp"
+                android:hint="@string/text_chon_thoi_gian_tho_den_lam"
+                android:drawableLeft="@drawable/ic_alarm_add_black_24dp"
+                />
+            <TextView
+                android:id="@+id/txtSearchingWorker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_dang_tim_tho"
+                android:layout_marginBottom="10dp"
+
+                />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSearchWoker"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_edt_pink"
+                android:text="@string/text_tim_tho_mong"
+                android:textColor="@color/black"
+                android:layout_marginBottom="10dp"
+                android:drawableRight="@drawable/ic_arrow_forward_black_24dp"
+                android:gravity="center"
+                />
+        </LinearLayout>
+
+<!--        Thanh chon vi tri-->
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center|bottom"
+            android:id="@+id/lnNhapViTri"
+            android:visibility="gone"
+            >
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="@string/text_chon_vi_tri"
+                android:background="@drawable/bg_edt_white"
+                android:layout_marginBottom="10dp"
+                android:drawableLeft="@drawable/ic_map_black_24dp"
+                />
+            <TextView
+                android:id="@+id/txtViTri1"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="@string/text_101_nguyen_trai"
+                android:background="@drawable/bg_edt_white"
+                android:layout_marginBottom="10dp"
+                android:drawableLeft="@drawable/ic_pin_drop_black_24dp"
+                />
+            <TextView
+                android:id="@+id/txtViTri2"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_edt_white"
+                android:layout_marginBottom="10dp"
+                android:drawableLeft="@drawable/ic_pin_drop_black_24dp"
+                android:text="@string/text_25_to_huu"
+                />
+        </LinearLayout>
+
+<!--        Thanh chon thoi gian-->
+        <LinearLayout
+            android:id="@+id/lnChonThoiGian"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center|bottom"
+            android:visibility="gone"
+            >
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="@string/text_chon_thoi_gian"
+                android:background="@drawable/bg_edt_white"
+                android:layout_marginBottom="10dp"
+                android:drawableLeft="@drawable/ic_date_range_black_24dp"
+                android:textColor="@color/black"
+                />
+            <TextView
+                android:id="@+id/txtChonNgay"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="@string/text_chon_ngay"
+                android:background="@drawable/bg_edt_white"
+                android:layout_marginBottom="10dp"
+                android:drawableLeft="@drawable/ic_today_black_24dp"
+                android:textAllCaps="false"
+                android:gravity="left|center"
+                />
+            <TextView
+                android:id="@+id/txtChonGio"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_edt_white"
+                android:layout_marginBottom="10dp"
+                android:drawableLeft="@drawable/ic_access_time_black_24dp"
+                android:text="@string/text_chon_gio"
+                android:gravity="left|center"
+                android:textAllCaps="false"
+                />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnOK"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_edt_pink"
+                android:text="@string/text_ok"
+                android:textColor="@color/black"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+
+<!--        Thanh chon mau-->
+        <LinearLayout
+            android:id="@+id/lnSellectModel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/siliver"
+                android:text="@string/text_da_tim_duoc_tho_phu_hop"
+                android:textColor="@color/black"
+                android:padding="@dimen/padding_material_8dp"
+                android:gravity="center"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/not_white"
+                android:text="@string/text_danh_gia_sao"
+                android:textColor="@color/black"
+                android:padding="@dimen/padding_material_4dp"
+                android:drawableLeft="@drawable/ic_check_black_24dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/siliver"
+                android:text="@string/text_cac_mau_noi_bat"
+                android:textColor="@color/black"
+                android:padding="@dimen/padding_material_8dp"
+                android:gravity="center"
+                />
+        </LinearLayout>
+    </LinearLayout>
 
 </FrameLayout>

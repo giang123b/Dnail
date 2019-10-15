@@ -40,4 +40,20 @@
     <string name="text_khac">Khác</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="text_nhap_dia_chi_tho_den_lam">Nhập địa chỉ thợ đến làm</string>
+    <string name="text_chon_thoi_gian_tho_den_lam">Chọn thời gian thợ đến làm</string>
+    <string name="text_chon_vi_tri">Chọn vị trí</string>
+    <string name="text_101_nguyen_trai">101 Nguyễn Trãi, Hà Đông, Hà Nội</string>
+    <string name="text_chon_ngay">Chọn ngày</string>
+    <string name="text_chon_gio">Chọn giờ</string>
+    <string name="text_25_to_huu">25 Tố Hữu, Hà Đông, Hà Nội</string>
+    <string name="text_chon_thoi_gian">Chọn thời gian</string>
+    <string name="text_ok">OK</string>
+    <string name="text_tim_tho_mong">Tìm thợ móng</string>
+    <string name="text_da_tim_duoc_tho_phu_hop">Đã tìm được thợ phù hơp</string>
+    <string name="text_danh_gia_sao">Đánh giá: 3.5 sao/20 lượt đánh giá</string>
+    <string name="text_cac_mau_noi_bat">Các mẫu nổi bật</string>
+    <string name="text_dang_tim_tho">Đang tìm thợ ...</string>
+    <string name="text_huy">Hủy</string>
+    <string name="text_dat_tho_lam_mong">Đặt thợ làm móng</string>
 </resources>

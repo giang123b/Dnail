@@ -50,16 +50,22 @@
             android:layout_marginTop="@dimen/layout_marginTop_logo_intro"
             />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_phone"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Shrine.TextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:hint="@string/text_nhap_sdt"
-            android:textSize="@dimen/textsize_sologan"
-            android:layout_gravity="center|bottom"
-            android:inputType="number"
-            android:background="@color/white"
-            />
+            android:layout_marginRight="20dp"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textsize_sologan"
+                android:layout_gravity="center|bottom"
+                android:inputType="number"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
     <Button
@@ -71,5 +77,6 @@
         android:layout_gravity="bottom|center"
         android:padding="@dimen/padding_button"
         android:layout_marginTop="@dimen/marginTop_btn_tiep_theo"
+        android:textColor="@color/black"
         />
 </LinearLayout>

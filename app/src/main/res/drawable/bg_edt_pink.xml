@@ -4,7 +4,7 @@
         android:width="1dp"
         />
     <solid
-        android:color="@color/not_white"
+        android:color="@color/pink_theme"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
         />
