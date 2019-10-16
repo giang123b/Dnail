@@ -65,6 +65,12 @@ public class MapFragment extends Fragment{
 
         addControls(root);
         addEvents();
+
+//        getActivity().getSupportFragmentManager()
+//                .beginTransaction()
+//                .add(R.id.container, new map())
+//                .commit();
+
         return root;
     }
 
@@ -176,6 +182,7 @@ public class MapFragment extends Fragment{
         lnChonThoiGian.setVisibility(lnChonThoiGian.GONE);
         btnSearchWoker.setVisibility(btnSearchWoker.GONE);
         txtSearchingWorker.setVisibility(txtSearchingWorker.GONE);
+        lnSellectModel.setVisibility(lnSellectModel.GONE);
     }
 
     private void addControls(View root) {

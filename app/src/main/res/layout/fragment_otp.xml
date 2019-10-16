@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:id="@+id/OTP_fragment"
     android:background="@color/not_white"
@@ -32,43 +33,19 @@
         android:textSize="@dimen/textsize_sdt"
         />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <com.alimuzaffar.lib.pin.PinEntryEditText
+        android:id="@+id/txt_pin_entry"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:cursorVisible="false"
+        android:digits="1234567890"
+        android:inputType="number"
+        android:maxLength="4"
+        android:textIsSelectable="false"
+        android:textSize="20sp"
+        app:pinAnimationType="popIn"
         android:layout_gravity="center"
-        >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:maxLength="1"
-            android:imeOptions="actionNext"
-            />
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:maxLength="1"
-            android:imeOptions="actionNext"
-            />
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:maxLength="1"
-            android:imeOptions="actionNext"
-            />
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:maxLength="1"
-            android:imeOptions="actionDone"
-            />
-
-    </LinearLayout>
+        />
 
     <TextView
         android:id="@+id/second_countdown"
@@ -82,15 +59,18 @@
     />
     <Button
         android:id="@+id/btn_next_otp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_round"
         android:text="@string/text_tiep"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:padding="5dp"
+        android:padding="@dimen/padding_button"
         android:imeOptions="actionDone"
         android:textColor="@color/black"
+
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
         />
 
 </LinearLayout>
