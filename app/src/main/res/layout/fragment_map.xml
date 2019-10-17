@@ -15,6 +15,7 @@
         android:orientation="vertical"
         android:gravity="center|bottom"
         >
+
         <!--        2 thanh chon dia diem, thoi gian-->
         <LinearLayout
             android:id="@+id/lnNhapThoiGianViTri"
