@@ -72,11 +72,12 @@
         android:layout_gravity="bottom|center"
         android:padding="@dimen/padding_button"
         android:layout_marginTop="@dimen/marginTop_btn_tiep_theo"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
 
         android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp"
         android:drawableLeft="@drawable/ic_telephone"
         android:drawableStart="@drawable/ic_telephone"
+
         />
 </LinearLayout>

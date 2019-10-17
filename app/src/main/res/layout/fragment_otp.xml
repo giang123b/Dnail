@@ -67,7 +67,7 @@
         android:layout_marginTop="20dp"
         android:padding="@dimen/padding_button"
         android:imeOptions="actionDone"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
 
         android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp"

@@ -76,11 +76,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
     MaterialButton btnOK;
     MaterialButton btnSearchWoker;
+    MaterialButton btnOKInSearchLocation;
 
     TextView txtViTri1;
     TextView txtViTri2;
 
-    LinearLayout lnNhapViTri;
+//    LinearLayout lnNhapViTri;
     LinearLayout lnChonThoiGian;
     LinearLayout lnNhapThoiGianViTri;
 
@@ -145,7 +146,18 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 //                        txtNhapViTri.setText(txtViTri2.getText());
 //                    }
 //                });
+                btnOKInSearchLocation.setVisibility(btnOKInSearchLocation.VISIBLE);
+                lnNhapThoiGianViTri.setVisibility(lnNhapThoiGianViTri.GONE);
 
+                btnOKInSearchLocation.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        txtNhapViTri.setText(searchView.getQuery());
+                        lnNhapThoiGianViTri.setVisibility(lnNhapThoiGianViTri.VISIBLE);
+                        searchView.setVisibility(searchView.GONE);
+                        btnOKInSearchLocation.setVisibility(btnOKInSearchLocation.INVISIBLE);
+                    }
+                });
             }
         });
 
@@ -155,7 +167,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             String gio = "";
             @Override
             public void onClick(View view) {
-                lnNhapViTri.setVisibility(lnNhapViTri.GONE);
+//                lnNhapViTri.setVisibility(lnNhapViTri.GONE);
                 lnChonThoiGian.setVisibility(lnChonThoiGian.VISIBLE);
                 btnSearchWoker.setVisibility(btnSearchWoker.GONE);
                 lnSellectModel.setVisibility(lnSellectModel.GONE);
@@ -227,7 +239,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
 //    Nhung cai phai an luc dau
     private void thingNeedGONE() {
-        lnNhapViTri.setVisibility(lnNhapViTri.GONE);
+//        lnNhapViTri.setVisibility(lnNhapViTri.GONE);
         lnChonThoiGian.setVisibility(lnChonThoiGian.GONE);
         btnSearchWoker.setVisibility(btnSearchWoker.GONE);
         txtSearchingWorker.setVisibility(txtSearchingWorker.GONE);
@@ -238,8 +250,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         txtChonNgay = root.findViewById(R.id.txtChonNgay);
         txtChonGio = root.findViewById(R.id.txtChonGio);
 
-        txtViTri1 = root.findViewById(R.id.txtViTri1);
-        txtViTri2 = root.findViewById(R.id.txtViTri2);
+//        txtViTri1 = root.findViewById(R.id.txtViTri1);
+//        txtViTri2 = root.findViewById(R.id.txtViTri2);
 
         txtNhapViTri = root.findViewById(R.id.txtNhapViTri);
         txtNhapThoiGian = root.findViewById(R.id.txtNhapThoiGian);
@@ -247,10 +259,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         txtSearchingWorker = root.findViewById(R.id.txtSearchingWorker);
 
         btnOK = root.findViewById(R.id.btnOK);
-
         btnSearchWoker = root.findViewById(R.id.btnSearchWoker);
+        btnOKInSearchLocation = root.findViewById(R.id.btnOKInSearchLocation);
 
-        lnNhapViTri = root.findViewById(R.id.lnNhapViTri);
+//        lnNhapViTri = root.findViewById(R.id.lnNhapViTri);
 
         lnChonThoiGian = root.findViewById(R.id.lnChonThoiGian);
         lnNhapThoiGianViTri = root.findViewById(R.id.lnNhapThoiGianViTri);

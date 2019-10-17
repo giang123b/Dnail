@@ -81,7 +81,7 @@
         android:text="@string/text_hoan_thanh"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:padding="@dimen/padding_button"
         />
 

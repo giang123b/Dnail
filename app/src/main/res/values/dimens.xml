@@ -22,4 +22,5 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="padding_material_4dp">4dp</dimen>
     <dimen name="padding_material_8dp">8dp</dimen>
+    <dimen name="margin_bottom">8dp</dimen>
 </resources>
