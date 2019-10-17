@@ -18,6 +18,8 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
@@ -30,6 +32,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.dnail1.Product.Model;
+import com.example.dnail1.Product.ModelAdapter;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -47,6 +51,7 @@ import com.google.android.material.button.MaterialButton;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -78,8 +83,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     MaterialButton btnSearchWoker;
     MaterialButton btnOKInSearchLocation;
 
-    TextView txtViTri1;
-    TextView txtViTri2;
+    TextView txtMoney;
 
 //    LinearLayout lnNhapViTri;
     LinearLayout lnChonThoiGian;
@@ -88,6 +92,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     LinearLayout lnSellectModel;
 
     CountDownTimer w;
+
+    RecyclerView recyclerView;
+    private ModelAdapter adapter;
+    private List<Model> modelList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -98,12 +106,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         addControls(root);
         addEvents();
 
-//        getActivity().getSupportFragmentManager()
-//                .beginTransaction()
-//                .add(R.id.container, new map())
-//                .commit();
-
         onMapSearch(root);
+
+        setRecyclerView(root);
 
         SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager()
                 .findFragmentById(R.id.map);
@@ -112,40 +117,29 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         return root;
     }
 
-//    private  void chuyenSangMap(){
-//        getActivity().getSupportFragmentManager()
-//                .beginTransaction()
-//                .add(R.id.container, new map())
-//                .commit();
-//    }
+    private void setRecyclerView(View root) {
+        recyclerView = root.findViewById(R.id.rv_model);
+        txtMoney = root.findViewById(R.id.txtMoney);
+
+        modelList = new ArrayList<>();
+        adapter = new ModelAdapter(getContext(), modelList, txtMoney);
+
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setAdapter(adapter);
+
+        prepareAlbums();
+    }
 
     private void addEvents() {
-
-        thingNeedGONE();
 
         txtNhapViTri.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 lnChonThoiGian.setVisibility(lnChonThoiGian.GONE);
-//                lnNhapViTri.setVisibility(lnNhapViTri.VISIBLE);
                 btnSearchWoker.setVisibility(btnSearchWoker.GONE);
                 lnSellectModel.setVisibility(lnSellectModel.GONE);
                 searchView.setVisibility(searchView.VISIBLE);
-//                chuyenSangMap();
-
-
-//                txtViTri1.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        txtNhapViTri.setText(txtViTri1.getText());
-//                    }
-//                });
-//                txtViTri2.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        txtNhapViTri.setText(txtViTri2.getText());
-//                    }
-//                });
                 btnOKInSearchLocation.setVisibility(btnOKInSearchLocation.VISIBLE);
                 lnNhapThoiGianViTri.setVisibility(lnNhapThoiGianViTri.GONE);
 
@@ -223,6 +217,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             public void onClick(View view) {
                 lnChonThoiGian.setVisibility(lnChonThoiGian.GONE);
                 btnSearchWoker.setVisibility(btnSearchWoker.VISIBLE);
+
+                btnSearchWoker.setText(R.string.text_tim_tho_mong);
             }
         });
 
@@ -237,21 +233,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
     }
 
-//    Nhung cai phai an luc dau
-    private void thingNeedGONE() {
-//        lnNhapViTri.setVisibility(lnNhapViTri.GONE);
-        lnChonThoiGian.setVisibility(lnChonThoiGian.GONE);
-        btnSearchWoker.setVisibility(btnSearchWoker.GONE);
-        txtSearchingWorker.setVisibility(txtSearchingWorker.GONE);
-        lnSellectModel.setVisibility(lnSellectModel.GONE);
-    }
-
     private void addControls(View root) {
         txtChonNgay = root.findViewById(R.id.txtChonNgay);
         txtChonGio = root.findViewById(R.id.txtChonGio);
 
-//        txtViTri1 = root.findViewById(R.id.txtViTri1);
-//        txtViTri2 = root.findViewById(R.id.txtViTri2);
 
         txtNhapViTri = root.findViewById(R.id.txtNhapViTri);
         txtNhapThoiGian = root.findViewById(R.id.txtNhapThoiGian);
@@ -283,7 +268,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     }
 
     private void timeCountDown() {
-        w=new CountDownTimer(3000, 1000) {
+        w=new CountDownTimer(1000, 1000) {
             public void onTick(long mil) {
 
             }
@@ -471,4 +456,57 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             }
         }
     }
+
+//    RecyclerView mau mong
+    private void prepareAlbums() {
+        int[] covers = new int[]{
+                R.drawable.md1,
+                R.drawable.md2,
+                R.drawable.md4,
+                R.drawable.md5,
+                R.drawable.md6,
+                R.drawable.md2,
+                R.drawable.md2,
+                R.drawable.md2,
+                R.drawable.md6,
+                R.drawable.md6,
+                R.drawable.md6,
+                R.drawable.md6,
+                R.drawable.md6,
+        };
+
+        Model a = new Model("Mẫu 1", 120, covers[0]);
+        modelList.add(a);
+
+        a = new Model("Mẫu 2", 220, covers[1]);
+        modelList.add(a);
+
+        a = new Model("Mẫu 3", 125, covers[2]);
+        modelList.add(a);
+
+        a = new Model("Mẫu 4", 240, covers[3]);
+        modelList.add(a);
+
+        a = new Model("Mẫu 5", 200, covers[4]);
+        modelList.add(a);
+
+        a = new Model("Mẫu 6", 150, covers[5]);
+        modelList.add(a);
+
+        a = new Model("Mẫu 7", 400, covers[6]);
+        modelList.add(a);
+
+        a = new Model("Mẫu 8", 110, covers[7]);
+        modelList.add(a);
+
+        a = new Model("Mẫu 9", 90, covers[8]);
+        modelList.add(a);
+
+        a = new Model("Mẫu 10", 100, covers[9]);
+        modelList.add(a);
+
+        adapter.notifyDataSetChanged();
+    }
+
+
 }
