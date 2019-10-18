@@ -23,10 +23,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -79,6 +84,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
     TextView txtSearchingWorker;
 
+
+
     MaterialButton btnOK;
     MaterialButton btnSearchWoker;
     MaterialButton btnOKInSearchLocation;
@@ -91,11 +98,28 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
     LinearLayout lnSellectModel;
 
+    LinearLayout linear_way_to_pay;
+    LinearLayout linear_promotion;
+    LinearLayout linear_note;
+    LinearLayout app_bar_bottom;
+
+//    bottom bar
+    LinearLayout linear_price;
+    TextView text_promotion;
+    TextView text_note;
+
     CountDownTimer w;
 
     RecyclerView recyclerView;
     private ModelAdapter adapter;
     private List<Model> modelList;
+
+    ImageView imageView_three_dots;
+    ImageView imageView_esc_in_way_to_pay;
+    ImageView imageView_esc_in_promotion;
+    ImageView imageView_esc_in_note;
+
+    Button button_linearModel_bookWorker;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -110,11 +134,16 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
         setRecyclerView(root);
 
+
+        setMap();
+
+        return root;
+    }
+
+    private void setMap() {
         SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-        return root;
     }
 
     private void setRecyclerView(View root) {
@@ -219,6 +248,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                 btnSearchWoker.setVisibility(btnSearchWoker.VISIBLE);
 
                 btnSearchWoker.setText(R.string.text_tim_tho_mong);
+
+                btnOKInSearchLocation.setVisibility(btnOKInSearchLocation.GONE);
             }
         });
 
@@ -228,6 +259,74 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                 txtSearchingWorker.setVisibility(txtSearchingWorker.VISIBLE);
                 btnSearchWoker.setText(R.string.text_huy);
                 timeCountDown();
+            }
+        });
+
+        imageView_three_dots.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopupMenu(v);
+            }
+        });
+
+//        bottom bar
+        linear_price.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linear_way_to_pay.setVisibility(linear_way_to_pay.VISIBLE);
+                linear_promotion.setVisibility(linear_promotion.GONE);
+                linear_note.setVisibility(linear_note.GONE);
+                app_bar_bottom.setVisibility(app_bar_bottom.GONE);
+                button_linearModel_bookWorker.setVisibility(button_linearModel_bookWorker.GONE);
+            }
+        });
+
+        imageView_esc_in_way_to_pay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linear_way_to_pay.setVisibility(linear_way_to_pay.GONE);
+                app_bar_bottom.setVisibility(app_bar_bottom.VISIBLE);
+                button_linearModel_bookWorker.setVisibility(button_linearModel_bookWorker.VISIBLE);
+            }
+        });
+
+        text_promotion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linear_promotion.setVisibility(linear_promotion.VISIBLE);
+                linear_way_to_pay.setVisibility(linear_way_to_pay.GONE);
+                linear_note.setVisibility(linear_note.GONE);
+                app_bar_bottom.setVisibility(app_bar_bottom.GONE);
+                button_linearModel_bookWorker.setVisibility(button_linearModel_bookWorker.GONE);
+            }
+        });
+
+        imageView_esc_in_promotion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linear_promotion.setVisibility(linear_promotion.GONE);
+                app_bar_bottom.setVisibility(app_bar_bottom.VISIBLE);
+                button_linearModel_bookWorker.setVisibility(button_linearModel_bookWorker.VISIBLE);
+            }
+        });
+
+        text_note.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linear_note.setVisibility(linear_note.VISIBLE);
+                linear_way_to_pay.setVisibility(linear_way_to_pay.GONE);
+                linear_promotion.setVisibility(linear_promotion.GONE);
+                app_bar_bottom.setVisibility(app_bar_bottom.GONE);
+                button_linearModel_bookWorker.setVisibility(button_linearModel_bookWorker.GONE);
+            }
+        });
+
+        imageView_esc_in_note.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linear_note.setVisibility(linear_note.GONE);
+                app_bar_bottom.setVisibility(app_bar_bottom.VISIBLE);
+                button_linearModel_bookWorker.setVisibility(button_linearModel_bookWorker.VISIBLE);
             }
         });
 
@@ -252,9 +351,25 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         lnChonThoiGian = root.findViewById(R.id.lnChonThoiGian);
         lnNhapThoiGianViTri = root.findViewById(R.id.lnNhapThoiGianViTri);
 
+        linear_way_to_pay = root.findViewById(R.id.linear_way_to_pay);
+        linear_promotion = root.findViewById(R.id.linear_promotion);
+        linear_note = root.findViewById(R.id.linear_note);
+
         lnSellectModel = root.findViewById(R.id.lnSellectModel);
 
         searchView = root.findViewById(R.id.sv_location);
+
+        imageView_three_dots = root.findViewById(R.id.imageView_three_dots);
+        imageView_esc_in_way_to_pay = root.findViewById(R.id.imageView_esc_in_way_to_pay);
+        imageView_esc_in_promotion = root.findViewById(R.id.imageView_esc_in_promotion);
+        imageView_esc_in_note = root.findViewById(R.id.imageView_esc_in_note);
+
+        linear_price = root.findViewById(R.id.linear_price);
+        text_promotion = root.findViewById(R.id.text_promotion);
+        text_note = root.findViewById(R.id.text_note);
+        app_bar_bottom = root.findViewById(R.id.app_bar_bottom);
+
+        button_linearModel_bookWorker = root.findViewById(R.id.button_linearModel_bookWorker);
     }
 
     @Override
@@ -508,5 +623,37 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         adapter.notifyDataSetChanged();
     }
 
+    //    Tao su kien cho doi mau mong
+    /**
+     * Showing popup menu when tapping on 3 dots
+     */
+    private void showPopupMenu(View view) {
+        // inflate menu
+        PopupMenu popup = new PopupMenu(getContext(), view);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.menu_refresh_woker, popup.getMenu());
+        popup.setOnMenuItemClickListener(new MyMenuItemClickListener());
+        popup.show();
+    }
 
+    /**
+     * Click listener for popup menu items
+     */
+    class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
+
+        public MyMenuItemClickListener() {
+        }
+
+        public boolean onMenuItemClick(MenuItem menuItem) {
+            switch (menuItem.getItemId()) {
+                case R.id.refresh_worker:
+                    lnSellectModel.setVisibility(lnSellectModel.GONE);
+                    btnSearchWoker.setVisibility(btnSearchWoker.VISIBLE);
+                    btnSearchWoker.setText(R.string.text_tim_tho_mong);
+                    return true;
+                default:
+            }
+            return false;
+        }
+    }
 }

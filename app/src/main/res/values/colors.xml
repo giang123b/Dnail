@@ -6,7 +6,7 @@
     <color name="black">#000000</color>
     <color name="pink_slogan">#fd718b</color>
     <color name="pink_theme">#fd718b</color>
-    <color name="siliver">#A0A0A0</color>
+    <color name="sliver">#A0A0A0</color>
     <color name="white">#ffff</color>
     <color name="not_white">#F8F7F7</color>
 
@@ -14,5 +14,5 @@
     <color name="toolbarIconColor">@color/textColorPrimary</color>
     <color name="loginPageBackgroundColor">#FFFFFF</color>
     <color name="productGridBackgroundColor">#FFFBFA</color>
-    <color name="textInputOutlineColor">#FBB8AC</color>
+    <color name="textInputOutlineColor">#fd718b</color>
 </resources>

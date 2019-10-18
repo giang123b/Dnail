@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/boder_edittext"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="10dp"
                 android:hint="@string/text_chon_thoi_gian_tho_den_lam"
                 android:drawableLeft="@drawable/ic_alarm_add_black_24dp"
                 android:textColorHint="@color/white"
@@ -135,7 +135,7 @@
                 />
         </LinearLayout>
 
-        <!--        Thanh chon mau-->
+        <!--        Thanh chon mau -->
         <LinearLayout
             android:id="@+id/lnSellectModel"
             android:layout_width="match_parent"
@@ -148,7 +148,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/siliver"
+                android:background="@color/sliver"
                 android:text="@string/text_da_tim_duoc_tho_phu_hop"
                 android:textColor="@color/black"
                 android:padding="@dimen/padding_material_8dp"
@@ -167,7 +167,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/siliver"
+                android:background="@color/sliver"
                 android:text="@string/text_cac_mau_noi_bat"
                 android:textColor="@color/black"
                 android:padding="@dimen/padding_material_8dp"
@@ -178,6 +178,7 @@
                 android:id="@+id/rv_model"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#E6FFFFFF"
                 />
 
             <!--Thanh Tien mat, khuyen mai-->
@@ -187,13 +188,14 @@
                 android:background="@color/black"
                 />
             <LinearLayout
+                android:id="@+id/app_bar_bottom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/not_white"
+                android:background="@color/white"
                 >
 
                 <LinearLayout
-                    android:id="@+id/lnPrice"
+                    android:id="@+id/linear_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -223,7 +225,7 @@
                     />
 
                 <TextView
-                    android:id="@+id/txtPromotion"
+                    android:id="@+id/text_promotion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/text_khuyen_mai"
@@ -239,7 +241,7 @@
                     />
 
                 <TextView
-                    android:id="@+id/txtNote"
+                    android:id="@+id/text_note"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/text_ghi_chu"
@@ -247,7 +249,220 @@
                     android:gravity="center"
                     android:layout_weight="1"
                     />
+
+                <TextView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/black"
+                    />
+
+                <ImageView
+                    android:id="@+id/imageView_three_dots"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_three_dots"
+                    />
             </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black"
+                />
+
+            <!--Phuong thuc thanh toan -->
+            <LinearLayout
+                android:id="@+id/linear_way_to_pay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                >
+
+                <!--text Phuong thuc thanh toan -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/sliver"
+
+                    >
+                    <TextView
+                        android:layout_width="330dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_phuong_thuc_thanh_toan"
+                        android:textColor="@color/black"
+                        android:padding="@dimen/padding_material_8dp"
+                        android:gravity="center"
+                        />
+                    <ImageView
+                        android:id="@+id/imageView_esc_in_way_to_pay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_exit"
+                        android:layout_gravity="center"
+                        />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:text="@string/text_tien_mat"
+                    android:drawableLeft="@drawable/ic_check_black_24dp"
+                    android:gravity="center|left"
+                    android:padding="@dimen/padding_material_8dp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:text="@string/text_them_the"
+                    android:drawableLeft="@drawable/ic_add_black_24dp"
+                    android:gravity="center|left"
+                    android:padding="@dimen/padding_material_8dp"
+                    />
+
+
+            </LinearLayout>
+
+        <!--Khuyen mai -->
+        <LinearLayout
+            android:id="@+id/linear_promotion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            >
+
+            <!--text Ma khuyen mai-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/sliver"
+                >
+                <TextView
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_ma_khuyen_mai"
+                    android:textColor="@color/black"
+                    android:padding="@dimen/padding_material_8dp"
+                    android:gravity="center"
+                    />
+                <ImageView
+                    android:id="@+id/imageView_esc_in_promotion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_exit"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:text="@string/text_dnail_km01"
+                android:drawableLeft="@drawable/ic_check_black_24dp"
+                android:gravity="center|left"
+                android:padding="@dimen/padding_material_8dp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:text="@string/text_dnail_km02"
+                android:gravity="center|left"
+                android:paddingLeft="30dp"
+                android:paddingTop="@dimen/padding_material_8dp"
+                android:paddingBottom="@dimen/padding_material_8dp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                >
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:drawableLeft="@drawable/ic_add_black_24dp"
+                    android:gravity="center|left"
+                    android:padding="@dimen/padding_material_8dp"
+                    android:hint="@string/text_nhap_ma_khuyen_mai"
+                    />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_su_dung"
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <!-- Ghi chu-->
+        <LinearLayout
+            android:id="@+id/linear_note"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/layoutHeight_ghi_chu"
+            android:orientation="vertical"
+            android:visibility="gone"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/sliver"
+                >
+                <TextView
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_ghi_chu"
+                    android:textColor="@color/black"
+                    android:padding="@dimen/padding_material_8dp"
+                    android:gravity="center"
+                    />
+                <ImageView
+                    android:id="@+id/imageView_esc_in_note"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_exit"
+                    android:layout_gravity="center"
+                    />
+
+            </LinearLayout>
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:hint="@string/text_vui_long_nhap_huong_dan_cho_tho"
+                android:padding="@dimen/padding_material_8dp"
+                />
+        </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -256,6 +471,7 @@
                 />
 
             <Button
+                android:id="@+id/button_linearModel_bookWorker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/text_dat_tho_lam_mong"

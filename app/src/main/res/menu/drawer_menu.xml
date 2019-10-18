@@ -12,5 +12,5 @@
         android:icon="@drawable/ic_gift"/>
     <item android:id="@+id/menu_other"
         android:title="@string/text_khac"
-        android:icon="@drawable/ic_three_dot"/>
+        android:icon="@drawable/ic_three_dots"/>
 </menu>

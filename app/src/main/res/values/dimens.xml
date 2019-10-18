@@ -35,4 +35,6 @@
     <dimen name="ic_album_overflow_width">20dp</dimen>
     <dimen name="ic_album_overflow_height">30dp</dimen>
     <dimen name="ic_album_overflow_margin_top">10dp</dimen>
+    <dimen name="marginLeft_button_su_dung">90dp</dimen>
+    <dimen name="layoutHeight_ghi_chu">100dp</dimen>
 </resources>
