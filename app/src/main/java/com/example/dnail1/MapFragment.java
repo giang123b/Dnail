@@ -94,14 +94,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
 //    LinearLayout lnNhapViTri;
     LinearLayout lnChonThoiGian;
-    LinearLayout lnNhapThoiGianViTri;
+    LinearLayout linear_time_locaion;
 
-    LinearLayout lnSellectModel;
+    LinearLayout linear_selectModel;
 
     LinearLayout linear_way_to_pay;
     LinearLayout linear_promotion;
     LinearLayout linear_note;
     LinearLayout app_bar_bottom;
+    LinearLayout linear_bookSuccessful;
 
 //    bottom bar
     LinearLayout linear_price;
@@ -167,16 +168,16 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             public void onClick(View view) {
                 lnChonThoiGian.setVisibility(lnChonThoiGian.GONE);
                 btnSearchWoker.setVisibility(btnSearchWoker.GONE);
-                lnSellectModel.setVisibility(lnSellectModel.GONE);
+                linear_selectModel.setVisibility(linear_selectModel.GONE);
                 searchView.setVisibility(searchView.VISIBLE);
                 btnOKInSearchLocation.setVisibility(btnOKInSearchLocation.VISIBLE);
-                lnNhapThoiGianViTri.setVisibility(lnNhapThoiGianViTri.GONE);
+                linear_time_locaion.setVisibility(linear_time_locaion.GONE);
 
                 btnOKInSearchLocation.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         txtNhapViTri.setText(searchView.getQuery());
-                        lnNhapThoiGianViTri.setVisibility(lnNhapThoiGianViTri.VISIBLE);
+                        linear_time_locaion.setVisibility(linear_time_locaion.VISIBLE);
                         searchView.setVisibility(searchView.GONE);
                         btnOKInSearchLocation.setVisibility(btnOKInSearchLocation.INVISIBLE);
                     }
@@ -193,7 +194,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 //                lnNhapViTri.setVisibility(lnNhapViTri.GONE);
                 lnChonThoiGian.setVisibility(lnChonThoiGian.VISIBLE);
                 btnSearchWoker.setVisibility(btnSearchWoker.GONE);
-                lnSellectModel.setVisibility(lnSellectModel.GONE);
+                linear_selectModel.setVisibility(linear_selectModel.GONE);
 
                 txtChonNgay.setOnClickListener(new View.OnClickListener() {
                     Calendar calendar = Calendar.getInstance();
@@ -330,6 +331,16 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             }
         });
 
+        button_linearModel_bookWorker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linear_bookSuccessful.setVisibility(linear_bookSuccessful.VISIBLE);
+                linear_time_locaion.setVisibility(linear_time_locaion.GONE);
+                linear_selectModel.setVisibility(linear_selectModel.GONE);
+                button_linearModel_bookWorker.setVisibility(button_linearModel_bookWorker.GONE);
+            }
+        });
+
     }
 
     private void addControls(View root) {
@@ -349,13 +360,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 //        lnNhapViTri = root.findViewById(R.id.lnNhapViTri);
 
         lnChonThoiGian = root.findViewById(R.id.lnChonThoiGian);
-        lnNhapThoiGianViTri = root.findViewById(R.id.lnNhapThoiGianViTri);
+        linear_time_locaion = root.findViewById(R.id.linear_time_locaion);
 
         linear_way_to_pay = root.findViewById(R.id.linear_way_to_pay);
         linear_promotion = root.findViewById(R.id.linear_promotion);
         linear_note = root.findViewById(R.id.linear_note);
 
-        lnSellectModel = root.findViewById(R.id.lnSellectModel);
+        linear_selectModel = root.findViewById(R.id.linear_selectModel);
 
         searchView = root.findViewById(R.id.sv_location);
 
@@ -370,6 +381,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         app_bar_bottom = root.findViewById(R.id.app_bar_bottom);
 
         button_linearModel_bookWorker = root.findViewById(R.id.button_linearModel_bookWorker);
+        linear_bookSuccessful = root.findViewById(R.id.linear_bookSuccessful);
     }
 
     @Override
@@ -390,7 +402,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             public void onFinish() {
                 txtSearchingWorker.setVisibility(txtSearchingWorker.GONE);
                 btnSearchWoker.setVisibility(btnSearchWoker.GONE);
-                lnSellectModel.setVisibility(lnSellectModel.VISIBLE);
+                linear_selectModel.setVisibility(linear_selectModel.VISIBLE);
             }
         }.start();
     }
@@ -647,7 +659,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         public boolean onMenuItemClick(MenuItem menuItem) {
             switch (menuItem.getItemId()) {
                 case R.id.refresh_worker:
-                    lnSellectModel.setVisibility(lnSellectModel.GONE);
+                    linear_selectModel.setVisibility(linear_selectModel.GONE);
                     btnSearchWoker.setVisibility(btnSearchWoker.VISIBLE);
                     btnSearchWoker.setText(R.string.text_tim_tho_mong);
                     return true;
