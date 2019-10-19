@@ -26,7 +26,8 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.MyViewHolder
     private Context mContext;
     private List<Model> modelList;
     private int selectedPosition=-1;
-    TextView txtMoney;
+    TextView txtMoney, text_linearBookSuccessful_selectedModel, text_linearBookSuccessful_selectedModelPrice;
+    ImageView image_linearBookSuccessful_selectedModel;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView txtNameModel, txtPriceModel;
@@ -40,10 +41,15 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.MyViewHolder
         }
     }
 
-    public ModelAdapter(Context mContext, List<Model> modelList, TextView txtMoney) {
+    public ModelAdapter(Context mContext, List<Model> modelList, TextView txtMoney,
+                        TextView text_linearBookSuccessful_selectedModel, TextView text_linearBookSuccessful_selectedModelPrice,
+                        ImageView image_linearBookSuccessful_selectedModel) {
         this.mContext = mContext;
         this.modelList = modelList;
+        this.text_linearBookSuccessful_selectedModel = text_linearBookSuccessful_selectedModel;
+        this.text_linearBookSuccessful_selectedModelPrice = text_linearBookSuccessful_selectedModelPrice;
         this.txtMoney = txtMoney;
+        this.image_linearBookSuccessful_selectedModel = image_linearBookSuccessful_selectedModel;
     }
 
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -72,6 +78,7 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.MyViewHolder
             public void onClick(View v) {
                 selectedPosition=position;
 
+                // Set text money in bottom bar
                 Model m = modelList.get(selectedPosition);
                 txtMoney.setText(m.getprice() + "K");
 
@@ -92,6 +99,11 @@ public class ModelAdapter extends RecyclerView.Adapter<ModelAdapter.MyViewHolder
                 window.setLayout(RecyclerView.LayoutParams.WRAP_CONTENT, RecyclerView.LayoutParams.WRAP_CONTENT);
 
                 dialog.show();
+
+                // Set text in linear book successful
+                text_linearBookSuccessful_selectedModel.setText(mContext.getString(R.string.text_da_chon) + " " + m.getName());
+                text_linearBookSuccessful_selectedModelPrice.setText(mContext.getString(R.string.text_mau_nay_co_gia) + " " + m.getprice() + "K");
+                image_linearBookSuccessful_selectedModel.setImageResource(m.getThumbnail());
 
                 notifyDataSetChanged();
             }

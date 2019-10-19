@@ -1,6 +1,7 @@
 package com.example.dnail1;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -115,12 +116,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     private ModelAdapter adapter;
     private List<Model> modelList;
 
-    ImageView imageView_three_dots;
-    ImageView imageView_esc_in_way_to_pay;
-    ImageView imageView_esc_in_promotion;
-    ImageView imageView_esc_in_note;
+    ImageView imageView_three_dots, imageView_esc_in_way_to_pay, imageView_esc_in_promotion, imageView_esc_in_note;
 
     Button button_linearModel_bookWorker;
+
+    TextView text_linearBookSuccessful_selectedModel, text_linearBookSuccessful_selectedModelPrice,
+            text_linearBookSuccessful_time, text_linearBookSuccessful_location;
+    ImageView image_linearBookSuccessful_selectedModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -152,7 +154,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         txtMoney = root.findViewById(R.id.txtMoney);
 
         modelList = new ArrayList<>();
-        adapter = new ModelAdapter(getContext(), modelList, txtMoney);
+        adapter = new ModelAdapter(getContext(), modelList, txtMoney, text_linearBookSuccessful_selectedModel,
+                 text_linearBookSuccessful_selectedModelPrice, image_linearBookSuccessful_selectedModel);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(mLayoutManager);
@@ -186,6 +189,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         });
 
         lnChonThoiGian.setVisibility(lnChonThoiGian.GONE);
+
         txtNhapThoiGian.setOnClickListener(new View.OnClickListener() {
             String ngay = "";
             String gio = "";
@@ -332,21 +336,27 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         });
 
         button_linearModel_bookWorker.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
                 linear_bookSuccessful.setVisibility(linear_bookSuccessful.VISIBLE);
                 linear_time_locaion.setVisibility(linear_time_locaion.GONE);
                 linear_selectModel.setVisibility(linear_selectModel.GONE);
                 button_linearModel_bookWorker.setVisibility(button_linearModel_bookWorker.GONE);
+
+                text_linearBookSuccessful_time.setText(getString(R.string.text_thoi_gian)+ txtNhapThoiGian.getText());
+                text_linearBookSuccessful_location.setText(getString(R.string.text_dia_diem) + txtNhapViTri.getText());
+
             }
         });
+
+
 
     }
 
     private void addControls(View root) {
         txtChonNgay = root.findViewById(R.id.txtChonNgay);
         txtChonGio = root.findViewById(R.id.txtChonGio);
-
 
         txtNhapViTri = root.findViewById(R.id.txtNhapViTri);
         txtNhapThoiGian = root.findViewById(R.id.txtNhapThoiGian);
@@ -356,8 +366,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         btnOK = root.findViewById(R.id.btnOK);
         btnSearchWoker = root.findViewById(R.id.btnSearchWoker);
         btnOKInSearchLocation = root.findViewById(R.id.btnOKInSearchLocation);
-
-//        lnNhapViTri = root.findViewById(R.id.lnNhapViTri);
 
         lnChonThoiGian = root.findViewById(R.id.lnChonThoiGian);
         linear_time_locaion = root.findViewById(R.id.linear_time_locaion);
@@ -382,6 +390,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
         button_linearModel_bookWorker = root.findViewById(R.id.button_linearModel_bookWorker);
         linear_bookSuccessful = root.findViewById(R.id.linear_bookSuccessful);
+
+        text_linearBookSuccessful_selectedModel = root.findViewById(R.id.text_linearBookSuccessful_selectedModel);
+        text_linearBookSuccessful_selectedModelPrice = root.findViewById(R.id.text_linearBookSuccessful_selectedModelPrice);
+        text_linearBookSuccessful_location = root.findViewById(R.id.text_linearBookSuccessful_location);
+        text_linearBookSuccessful_time = root.findViewById(R.id.text_linearBookSuccessful_time);
+        image_linearBookSuccessful_selectedModel = root.findViewById(R.id.image_linearBookSuccessful_selectedModel);
     }
 
     @Override

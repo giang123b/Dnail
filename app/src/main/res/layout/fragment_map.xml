@@ -502,6 +502,7 @@
                 android:gravity="center"
                 />
             <TextView
+                android:id="@+id/text_linearBookSuccessful_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -519,6 +520,7 @@
                 />
 
             <TextView
+                android:id="@+id/text_linearBookSuccessful_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -542,6 +544,7 @@
                 android:background="@color/white"
                 >
                 <ImageView
+                    android:id="@+id/image_linearBookSuccessful_selectedModel"
                     android:layout_width="70dp"
                     android:layout_height="110dp"
                     android:layout_marginLeft="@dimen/padding_material_8dp"
@@ -551,8 +554,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:layout_gravity="center"
                     >
                     <TextView
+                        android:id="@+id/text_linearBookSuccessful_selectedModel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/white"
@@ -562,6 +567,7 @@
                         android:gravity="center|left"
                         />
                     <TextView
+                        android:id="@+id/text_linearBookSuccessful_selectedModelPrice"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/white"
