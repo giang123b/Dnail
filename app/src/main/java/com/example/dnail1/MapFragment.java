@@ -137,7 +137,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
         setRecyclerView(root);
 
-
         setMap();
 
         return root;
@@ -195,7 +194,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             String gio = "";
             @Override
             public void onClick(View view) {
-//                lnNhapViTri.setVisibility(lnNhapViTri.GONE);
                 lnChonThoiGian.setVisibility(lnChonThoiGian.VISIBLE);
                 btnSearchWoker.setVisibility(btnSearchWoker.GONE);
                 linear_selectModel.setVisibility(linear_selectModel.GONE);

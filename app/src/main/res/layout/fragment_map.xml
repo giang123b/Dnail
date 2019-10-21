@@ -90,7 +90,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center|bottom"
-            android:visibility="gone"
+<!--            android:visibility="gone"-->
             >
             <TextView
                 android:layout_width="wrap_content"
@@ -148,7 +148,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/sliver"
+                android:background="@color/not_pink"
                 android:text="@string/text_da_tim_duoc_tho_phu_hop"
                 android:textColor="@color/black"
                 android:padding="@dimen/padding_material_8dp"
@@ -167,7 +167,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/sliver"
+                android:background="@color/not_pink"
                 android:text="@string/text_cac_mau_noi_bat"
                 android:textColor="@color/black"
                 android:padding="@dimen/padding_material_8dp"
@@ -495,7 +495,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/sliver"
+                android:background="@color/not_pink"
                 android:text="@string/text_dat_tho_thanh_cong"
                 android:textColor="@color/black"
                 android:padding="@dimen/padding_material_8dp"
@@ -582,7 +582,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/sliver"
+                android:background="@color/not_pink"
                 android:text="@string/text_thong_tin_tho"
                 android:textColor="@color/black"
                 android:padding="@dimen/padding_material_8dp"
