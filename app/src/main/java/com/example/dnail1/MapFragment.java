@@ -6,6 +6,8 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.graphics.Rect;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -19,10 +21,13 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.CountDownTimer;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -38,8 +43,10 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.example.dnail1.Product.Model;
-import com.example.dnail1.Product.ModelAdapter;
+import com.example.dnail1.Products.Model;
+import com.example.dnail1.Products.ModelAdapter;
+import com.example.dnail1.Times.Time;
+import com.example.dnail1.Times.TimeAdapter;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -81,7 +88,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     TextView txtNhapThoiGian;
 
     TextView txtChonNgay;
-    TextView txtChonGio;
+    TextView txtCpink_themeio;
 
     TextView txtSearchingWorker;
 
@@ -94,7 +101,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     TextView txtMoney;
 
 //    LinearLayout lnNhapViTri;
-    LinearLayout lnChonThoiGian;
+    LinearLayout linear_chooseTime;
     LinearLayout linear_time_locaion;
 
     LinearLayout linear_selectModel;
@@ -124,6 +131,25 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             text_linearBookSuccessful_time, text_linearBookSuccessful_location;
     ImageView image_linearBookSuccessful_selectedModel;
 
+//    choose time
+private RecyclerView recyclerViewMorning;
+    private RecyclerView recyclerViewAfternoon;
+    private RecyclerView recyclerViewNight;
+    private TimeAdapter adapterMorning;
+    private TimeAdapter adapterAfternoon;
+    private TimeAdapter adapterNight;
+    private List<Time> timeListMorning;
+    private List<Time> timeListAfternoon;
+    private List<Time> timeListNight;
+
+    private TextView text_chooseTime_morning;
+    private TextView text_chooseTime_afternoon;
+    private TextView text_chooseTime_night;
+
+    private TextView text_chooseTime_day1;
+    private TextView text_chooseTime_day2;
+    private TextView text_chooseTime_day3;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -131,7 +157,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         View root = inflater.inflate(R.layout.fragment_map, container, false);
 
         addControls(root);
-        addEvents();
+        addEvents(root);
 
         onMapSearch(root);
 
@@ -163,12 +189,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         prepareAlbums();
     }
 
-    private void addEvents() {
+    private void addEvents(View view) {
 
         txtNhapViTri.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                lnChonThoiGian.setVisibility(lnChonThoiGian.GONE);
+                linear_chooseTime.setVisibility(linear_chooseTime.GONE);
                 btnSearchWoker.setVisibility(btnSearchWoker.GONE);
                 linear_selectModel.setVisibility(linear_selectModel.GONE);
                 searchView.setVisibility(searchView.VISIBLE);
@@ -187,59 +213,17 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             }
         });
 
-        lnChonThoiGian.setVisibility(lnChonThoiGian.GONE);
+        linear_chooseTime.setVisibility(linear_chooseTime.GONE);
 
         txtNhapThoiGian.setOnClickListener(new View.OnClickListener() {
             String ngay = "";
             String gio = "";
             @Override
             public void onClick(View view) {
-                lnChonThoiGian.setVisibility(lnChonThoiGian.VISIBLE);
+                linear_chooseTime.setVisibility(linear_chooseTime.VISIBLE);
+                btnOK.setVisibility(btnOK.VISIBLE);
                 btnSearchWoker.setVisibility(btnSearchWoker.GONE);
                 linear_selectModel.setVisibility(linear_selectModel.GONE);
-
-                txtChonNgay.setOnClickListener(new View.OnClickListener() {
-                    Calendar calendar = Calendar.getInstance();
-                    int year = calendar.get(Calendar.YEAR);
-                    int month = calendar.get(Calendar.MONTH);
-                    int day = calendar.get(Calendar.DAY_OF_MONTH);
-                    @Override
-                    public void onClick(View view) {
-                        DatePickerDialog datePicker = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                                calendar.set(i, i1, i2);
-                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                                txtChonNgay.setText(simpleDateFormat.format(calendar.getTime()));
-                                ngay = simpleDateFormat.format(calendar.getTime());
-
-                                txtNhapThoiGian.setText(ngay + " - " + gio);
-                            }
-                        }, year, month, day);
-                        datePicker.show();
-                    }
-                });
-
-                txtChonGio.setOnClickListener(new View.OnClickListener() {
-                    Calendar calendar = Calendar.getInstance();
-                    int hour = calendar.get(Calendar.HOUR_OF_DAY);
-                    int minute = calendar.get(Calendar.MINUTE);
-                    @Override
-                    public void onClick(View view) {
-                        TimePickerDialog timePicker = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
-                            @Override
-                            public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
-                                calendar.set(0, 0, 0, i, i1);
-                                txtChonGio.setText(simpleDateFormat.format(calendar.getTime()));
-                                gio = simpleDateFormat.format(calendar.getTime());
-
-                                txtNhapThoiGian.setText(ngay + " - " + gio);
-                            }
-                        }, hour, minute, true);
-                        timePicker.show();
-                    }
-                });
 
             }
         });
@@ -247,7 +231,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         btnOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                lnChonThoiGian.setVisibility(lnChonThoiGian.GONE);
+                linear_chooseTime.setVisibility(linear_chooseTime.GONE);
                 btnSearchWoker.setVisibility(btnSearchWoker.VISIBLE);
 
                 btnSearchWoker.setText(R.string.text_tim_tho_mong);
@@ -348,13 +332,313 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             }
         });
 
-
+//        set linear choose time
+        setLinearChooseTime(view);
 
     }
 
+    private void setLinearChooseTime(View view) {
+        rcMorning(view);
+        recAfternoon(view);
+        rcNight(view);
+
+        text_chooseTime_morning = view.findViewById(R.id.text_chooseTime_morning);
+        text_chooseTime_afternoon = view.findViewById(R.id.text_chooseTime_afternoon);
+        text_chooseTime_night = view.findViewById(R.id.text_chooseTime_night);
+
+        text_chooseTime_morning.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                text_chooseTime_morning.setBackgroundResource(R.drawable.shape_round_full_pink);
+                text_chooseTime_morning.setTextColor(getResources().getColor(R.color.white));
+                text_chooseTime_afternoon.setBackgroundResource(R.drawable.shape_round_not_full_pink);
+                text_chooseTime_afternoon.setTextColor(getResources().getColor(R.color.pink_theme));
+                text_chooseTime_night.setBackgroundResource(R.drawable.shape_round_not_full_pink);
+                text_chooseTime_night.setTextColor(getResources().getColor(R.color.pink_theme));
+
+                recyclerViewMorning.setVisibility(recyclerViewMorning.VISIBLE);
+                recyclerViewAfternoon.setVisibility(recyclerViewAfternoon.GONE);
+                recyclerViewNight.setVisibility(recyclerViewNight.GONE);
+            }
+        });
+
+        text_chooseTime_afternoon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                text_chooseTime_afternoon.setBackgroundResource(R.drawable.shape_round_full_pink);
+                text_chooseTime_afternoon.setTextColor(getResources().getColor(R.color.white));
+                text_chooseTime_morning.setBackgroundResource(R.drawable.shape_round_not_full_pink);
+                text_chooseTime_morning.setTextColor(getResources().getColor(R.color.pink_theme));
+                text_chooseTime_night.setBackgroundResource(R.drawable.shape_round_not_full_pink);
+                text_chooseTime_night.setTextColor(getResources().getColor(R.color.pink_theme));
+
+                recyclerViewMorning.setVisibility(recyclerViewMorning.GONE);
+                recyclerViewAfternoon.setVisibility(recyclerViewAfternoon.VISIBLE);
+                recyclerViewNight.setVisibility(recyclerViewNight.GONE);
+            }
+        });
+
+        text_chooseTime_night.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                text_chooseTime_night.setBackgroundResource(R.drawable.shape_round_full_pink);
+                text_chooseTime_night.setTextColor(getResources().getColor(R.color.white));
+                text_chooseTime_afternoon.setBackgroundResource(R.drawable.shape_round_not_full_pink);
+                text_chooseTime_afternoon.setTextColor(getResources().getColor(R.color.pink_theme));
+                text_chooseTime_morning.setBackgroundResource(R.drawable.shape_round_not_full_pink);
+                text_chooseTime_morning.setTextColor(getResources().getColor(R.color.pink_theme));
+
+                recyclerViewMorning.setVisibility(recyclerViewMorning.GONE);
+                recyclerViewAfternoon.setVisibility(recyclerViewAfternoon.GONE);
+                recyclerViewNight.setVisibility(recyclerViewNight.VISIBLE);
+            }
+        });
+
+        text_chooseTime_day1 = view.findViewById(R.id.text_chooseTime_day1);
+        text_chooseTime_day2 = view.findViewById(R.id.text_chooseTime_day2);
+        text_chooseTime_day3 = view.findViewById(R.id.text_chooseTime_day3);
+
+        text_chooseTime_day1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                text_chooseTime_day1.setBackgroundResource(R.drawable.shape_round_full_pink);
+                text_chooseTime_day1.setTextColor(getResources().getColor(R.color.white));
+                text_chooseTime_day2.setBackgroundResource(R.drawable.shape_round_not_full_pink);
+                text_chooseTime_day2.setTextColor(getResources().getColor(R.color.pink_theme));
+                text_chooseTime_day3.setBackgroundResource(R.drawable.shape_round_not_full_pink);
+                text_chooseTime_day3.setTextColor(getResources().getColor(R.color.pink_theme));
+
+            }
+        });
+
+        text_chooseTime_day2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                text_chooseTime_day2.setBackgroundResource(R.drawable.shape_round_full_pink);
+                text_chooseTime_day2.setTextColor(getResources().getColor(R.color.white));
+                text_chooseTime_day1.setBackgroundResource(R.drawable.shape_round_not_full_pink);
+                text_chooseTime_day1.setTextColor(getResources().getColor(R.color.pink_theme));
+                text_chooseTime_day3.setBackgroundResource(R.drawable.shape_round_not_full_pink);
+                text_chooseTime_day3.setTextColor(getResources().getColor(R.color.pink_theme));
+            }
+        });
+
+        text_chooseTime_day3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                text_chooseTime_day3.setBackgroundResource(R.drawable.shape_round_full_pink);
+                text_chooseTime_day3.setTextColor(getResources().getColor(R.color.white));
+                text_chooseTime_day1.setBackgroundResource(R.drawable.shape_round_not_full_pink);
+                text_chooseTime_day1.setTextColor(getResources().getColor(R.color.pink_theme));
+                text_chooseTime_day2.setBackgroundResource(R.drawable.shape_round_not_full_pink);
+                text_chooseTime_day2.setTextColor(getResources().getColor(R.color.pink_theme));
+            }
+        });
+
+        Calendar calendar = Calendar.getInstance();
+
+        SimpleDateFormat simpleDateFormatDay = new SimpleDateFormat("dd");
+        SimpleDateFormat simpleDateFormatMonth = new SimpleDateFormat("MM");
+        String month = simpleDateFormatMonth.format(calendar.getTime());
+
+        String day1 = String.valueOf(Integer.parseInt(simpleDateFormatDay.format(calendar.getTime())));
+        String day2 = String.valueOf(Integer.parseInt(simpleDateFormatDay.format(calendar.getTime())) + 1);
+        String day3 = String.valueOf(Integer.parseInt(simpleDateFormatDay.format(calendar.getTime())) + 2);
+
+        text_chooseTime_day1.setText(day1 + "/" + month);
+        text_chooseTime_day2.setText(day2 + "/" + month);
+        text_chooseTime_day3.setText(day3 + "/" + month);
+    }
+
+//    Choose time
+    private void rcNight(View view) {
+        recyclerViewNight =  view.findViewById(R.id.rc_timeNight);
+
+        timeListNight = new ArrayList<>();
+        adapterNight = new TimeAdapter(getContext(), timeListNight);
+
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 3);
+        recyclerViewNight.setLayoutManager(mLayoutManager);
+        recyclerViewNight.addItemDecoration(new GridSpacingItemDecoration(3, dpToPx(10), true));
+        recyclerViewNight.setItemAnimator(new DefaultItemAnimator());
+        recyclerViewNight.setAdapter(adapterNight);
+
+        prepareAlbumsNight();
+    }
+
+    private void recAfternoon(View view) {
+        recyclerViewAfternoon =  view.findViewById(R.id.rc_timeAfternoon);
+
+        timeListAfternoon = new ArrayList<>();
+        adapterAfternoon = new TimeAdapter(getContext(), timeListAfternoon);
+
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 3);
+        recyclerViewAfternoon.setLayoutManager(mLayoutManager);
+        recyclerViewAfternoon.addItemDecoration(new GridSpacingItemDecoration(3, dpToPx(10), true));
+        recyclerViewAfternoon.setItemAnimator(new DefaultItemAnimator());
+        recyclerViewAfternoon.setAdapter(adapterAfternoon);
+
+        prepareAlbumsAfternoon();
+
+    }
+
+    private void rcMorning(View view) {
+
+        recyclerViewMorning =  view.findViewById(R.id.rc_time);
+
+        timeListMorning = new ArrayList<>();
+        adapterMorning = new TimeAdapter(getContext(), timeListMorning);
+
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 3);
+        recyclerViewMorning.setLayoutManager(mLayoutManager);
+        recyclerViewMorning.addItemDecoration(new GridSpacingItemDecoration(3, dpToPx(10), true));
+        recyclerViewMorning.setItemAnimator(new DefaultItemAnimator());
+        recyclerViewMorning.setAdapter(adapterMorning);
+
+        prepareAlbumsMoring();
+    }
+
+    private void prepareAlbumsMoring() {
+
+        Time a = new Time( "8:00");
+        timeListMorning.add(a);
+
+        a = new Time("8:30");
+        timeListMorning.add(a);
+
+        a = new Time("9:00");
+        timeListMorning.add(a);
+
+        a = new Time("9:30");
+        timeListMorning.add(a);
+
+        a = new Time("10:00");
+        timeListMorning.add(a);
+
+        a = new Time("10:30");
+        timeListMorning.add(a);
+
+        a = new Time("11:00");
+        timeListMorning.add(a);
+
+        a = new Time("11:30");
+        timeListMorning.add(a);
+
+        adapterMorning.notifyDataSetChanged();
+    }
+
+    private void prepareAlbumsAfternoon() {
+
+        Time a = new Time( "12:00");
+        timeListAfternoon.add(a);
+
+        a = new Time("12:30");
+        timeListAfternoon.add(a);
+
+        a = new Time("13:00");
+        timeListAfternoon.add(a);
+
+        a = new Time("13:30");
+        timeListAfternoon.add(a);
+
+        a = new Time("14:00");
+        timeListAfternoon.add(a);
+
+        a = new Time("14:30");
+        timeListAfternoon.add(a);
+
+        a = new Time("15:00");
+        timeListAfternoon.add(a);
+
+        a = new Time("15:30");
+        timeListAfternoon.add(a);
+
+        a = new Time("16:00");
+        timeListAfternoon.add(a);
+
+        a = new Time("16:30");
+        timeListAfternoon.add(a);
+
+        a = new Time("17:00");
+        timeListAfternoon.add(a);
+
+        a = new Time("17:30");
+        timeListAfternoon.add(a);
+
+
+        adapterAfternoon.notifyDataSetChanged();
+    }
+
+    private void prepareAlbumsNight() {
+
+        Time a = new Time( "18:00");
+        timeListNight.add(a);
+
+        a = new Time("18:30");
+        timeListNight.add(a);
+
+        a = new Time("19:00");
+        timeListNight.add(a);
+
+        a = new Time("19:30");
+        timeListNight.add(a);
+
+        a = new Time("20:00");
+        timeListNight.add(a);
+
+        a = new Time("20:30");
+        timeListNight.add(a);
+
+        a = new Time("21:00");
+        timeListNight.add(a);
+
+        a = new Time("21:30");
+        timeListNight.add(a);
+
+        adapterNight.notifyDataSetChanged();
+    }
+
+    public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
+
+        private int spanCount;
+        private int spacing;
+        private boolean includeEdge;
+
+        public GridSpacingItemDecoration(int spanCount, int spacing, boolean includeEdge) {
+            this.spanCount = spanCount;
+            this.spacing = spacing;
+            this.includeEdge = includeEdge;
+        }
+
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+            int position = parent.getChildAdapterPosition(view); // item position
+            int column = position % spanCount; // item column
+
+            if (includeEdge) {
+                outRect.left = spacing - column * spacing / spanCount; // spacing - column * ((1f / spanCount) * spacing)
+                outRect.right = (column + 1) * spacing / spanCount; // (column + 1) * ((1f / spanCount) * spacing)
+
+                if (position < spanCount) { // top edge
+                    outRect.top = spacing;
+                }
+                outRect.bottom = spacing; // item bottom
+            } else {
+                outRect.left = column * spacing / spanCount; // column * ((1f / spanCount) * spacing)
+                outRect.right = spacing - (column + 1) * spacing / spanCount; // spacing - (column + 1) * ((1f /    spanCount) * spacing)
+                if (position >= spanCount) {
+                    outRect.top = spacing; // item top
+                }
+            }
+        }
+    }
+
+    private int dpToPx(int dp) {
+        Resources r = getResources();
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+    }
+
+// Add id
     private void addControls(View root) {
-        txtChonNgay = root.findViewById(R.id.txtChonNgay);
-        txtChonGio = root.findViewById(R.id.txtChonGio);
 
         txtNhapViTri = root.findViewById(R.id.txtNhapViTri);
         txtNhapThoiGian = root.findViewById(R.id.txtNhapThoiGian);
@@ -365,7 +649,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         btnSearchWoker = root.findViewById(R.id.btnSearchWoker);
         btnOKInSearchLocation = root.findViewById(R.id.btnOKInSearchLocation);
 
-        lnChonThoiGian = root.findViewById(R.id.lnChonThoiGian);
+        linear_chooseTime = root.findViewById(R.id.linear_chooseTime);
         linear_time_locaion = root.findViewById(R.id.linear_time_locaion);
 
         linear_way_to_pay = root.findViewById(R.id.linear_way_to_pay);

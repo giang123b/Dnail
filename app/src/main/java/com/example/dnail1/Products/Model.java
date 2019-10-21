@@ -1,4 +1,4 @@
-package com.example.dnail1.Product;
+package com.example.dnail1.Products;
 
 public class Model {
     private String name;
