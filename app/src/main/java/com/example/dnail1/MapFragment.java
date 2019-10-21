@@ -84,8 +84,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     SearchView searchView;
 
 
-    TextView txtNhapViTri;
-    TextView txtNhapThoiGian;
+    TextView text_linearTimeLocation_enterLocation;
+    TextView text_linearTimeLocation_enterTime;
 
     TextView txtChonNgay;
     TextView txtCpink_themeio;
@@ -96,7 +96,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
     MaterialButton btnOK;
     MaterialButton btnSearchWoker;
-    MaterialButton btnOKInSearchLocation;
+    MaterialButton button_linearSearchLocation_ok;
 
     TextView txtMoney;
 
@@ -132,7 +132,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     ImageView image_linearBookSuccessful_selectedModel;
 
 //    choose time
-private RecyclerView recyclerViewMorning;
+    private RecyclerView recyclerViewMorning;
     private RecyclerView recyclerViewAfternoon;
     private RecyclerView recyclerViewNight;
     private TimeAdapter adapterMorning;
@@ -142,13 +142,9 @@ private RecyclerView recyclerViewMorning;
     private List<Time> timeListAfternoon;
     private List<Time> timeListNight;
 
-    private TextView text_chooseTime_morning;
-    private TextView text_chooseTime_afternoon;
-    private TextView text_chooseTime_night;
+    private TextView text_chooseTime_morning, text_chooseTime_afternoon, text_chooseTime_night;
 
-    private TextView text_chooseTime_day1;
-    private TextView text_chooseTime_day2;
-    private TextView text_chooseTime_day3;
+    private TextView text_chooseTime_day1, text_chooseTime_day2, text_chooseTime_day3;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -168,63 +164,86 @@ private RecyclerView recyclerViewMorning;
         return root;
     }
 
-    private void setMap() {
-        SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-    }
+    // Add id
+    private void addControls(View root) {
 
-    private void setRecyclerView(View root) {
-        recyclerView = root.findViewById(R.id.rv_model);
-        txtMoney = root.findViewById(R.id.txtMoney);
+        text_linearTimeLocation_enterLocation = root.findViewById(R.id.text_linearTimeLocation_enterLocation);
+        text_linearTimeLocation_enterTime = root.findViewById(R.id.text_linearTimeLocation_enterTime);
 
-        modelList = new ArrayList<>();
-        adapter = new ModelAdapter(getContext(), modelList, txtMoney, text_linearBookSuccessful_selectedModel,
-                 text_linearBookSuccessful_selectedModelPrice, image_linearBookSuccessful_selectedModel);
+        txtSearchingWorker = root.findViewById(R.id.txtSearchingWorker);
 
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(adapter);
+        btnOK = root.findViewById(R.id.btnOK);
+        btnSearchWoker = root.findViewById(R.id.btnSearchWoker);
+        button_linearSearchLocation_ok = root.findViewById(R.id.button_linearSearchLocation_ok);
 
-        prepareAlbums();
+        linear_chooseTime = root.findViewById(R.id.linear_chooseTime);
+        linear_time_locaion = root.findViewById(R.id.linear_time_locaion);
+
+        linear_way_to_pay = root.findViewById(R.id.linear_way_to_pay);
+        linear_promotion = root.findViewById(R.id.linear_promotion);
+        linear_note = root.findViewById(R.id.linear_note);
+
+        linear_selectModel = root.findViewById(R.id.linear_selectModel);
+
+        searchView = root.findViewById(R.id.sv_location);
+
+        imageView_three_dots = root.findViewById(R.id.imageView_three_dots);
+        imageView_esc_in_way_to_pay = root.findViewById(R.id.imageView_esc_in_way_to_pay);
+        imageView_esc_in_promotion = root.findViewById(R.id.imageView_esc_in_promotion);
+        imageView_esc_in_note = root.findViewById(R.id.imageView_esc_in_note);
+
+        linear_price = root.findViewById(R.id.linear_price);
+        text_promotion = root.findViewById(R.id.text_promotion);
+        text_note = root.findViewById(R.id.text_note);
+        app_bar_bottom = root.findViewById(R.id.app_bar_bottom);
+
+        button_linearModel_bookWorker = root.findViewById(R.id.button_linearModel_bookWorker);
+        linear_bookSuccessful = root.findViewById(R.id.linear_bookSuccessful);
+
+        text_linearBookSuccessful_selectedModel = root.findViewById(R.id.text_linearBookSuccessful_selectedModel);
+        text_linearBookSuccessful_selectedModelPrice = root.findViewById(R.id.text_linearBookSuccessful_selectedModelPrice);
+        text_linearBookSuccessful_location = root.findViewById(R.id.text_linearBookSuccessful_location);
+        text_linearBookSuccessful_time = root.findViewById(R.id.text_linearBookSuccessful_time);
+        image_linearBookSuccessful_selectedModel = root.findViewById(R.id.image_linearBookSuccessful_selectedModel);
     }
 
     private void addEvents(View view) {
 
-        txtNhapViTri.setOnClickListener(new View.OnClickListener() {
+        text_linearTimeLocation_enterLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 linear_chooseTime.setVisibility(linear_chooseTime.GONE);
                 btnSearchWoker.setVisibility(btnSearchWoker.GONE);
                 linear_selectModel.setVisibility(linear_selectModel.GONE);
                 searchView.setVisibility(searchView.VISIBLE);
-                btnOKInSearchLocation.setVisibility(btnOKInSearchLocation.VISIBLE);
+                button_linearSearchLocation_ok.setVisibility(button_linearSearchLocation_ok.VISIBLE);
                 linear_time_locaion.setVisibility(linear_time_locaion.GONE);
 
-                btnOKInSearchLocation.setOnClickListener(new View.OnClickListener() {
+                button_linearSearchLocation_ok.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        txtNhapViTri.setText(searchView.getQuery());
+                        text_linearTimeLocation_enterLocation.setText(searchView.getQuery());
                         linear_time_locaion.setVisibility(linear_time_locaion.VISIBLE);
                         searchView.setVisibility(searchView.GONE);
-                        btnOKInSearchLocation.setVisibility(btnOKInSearchLocation.INVISIBLE);
+                        btnSearchWoker.setVisibility(btnSearchWoker.VISIBLE);
+                        button_linearSearchLocation_ok.setVisibility(button_linearSearchLocation_ok.GONE);
                     }
                 });
             }
         });
 
-        linear_chooseTime.setVisibility(linear_chooseTime.GONE);
-
-        txtNhapThoiGian.setOnClickListener(new View.OnClickListener() {
-            String ngay = "";
-            String gio = "";
+        text_linearTimeLocation_enterTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 linear_chooseTime.setVisibility(linear_chooseTime.VISIBLE);
+
                 btnOK.setVisibility(btnOK.VISIBLE);
+
                 btnSearchWoker.setVisibility(btnSearchWoker.GONE);
+
                 linear_selectModel.setVisibility(linear_selectModel.GONE);
 
+                button_linearSearchLocation_ok.setVisibility(button_linearSearchLocation_ok.GONE);
             }
         });
 
@@ -233,10 +252,8 @@ private RecyclerView recyclerViewMorning;
             public void onClick(View view) {
                 linear_chooseTime.setVisibility(linear_chooseTime.GONE);
                 btnSearchWoker.setVisibility(btnSearchWoker.VISIBLE);
-
-                btnSearchWoker.setText(R.string.text_tim_tho_mong);
-
-                btnOKInSearchLocation.setVisibility(btnOKInSearchLocation.GONE);
+//                btnSearchWoker.setText(R.string.text_tim_tho_mong);
+                btnOK.setVisibility(btnOK.GONE);
             }
         });
 
@@ -245,6 +262,7 @@ private RecyclerView recyclerViewMorning;
             public void onClick(View view) {
                 txtSearchingWorker.setVisibility(txtSearchingWorker.VISIBLE);
                 btnSearchWoker.setText(R.string.text_huy);
+                btnOK.setVisibility(btnOK.GONE);
                 timeCountDown();
             }
         });
@@ -257,91 +275,17 @@ private RecyclerView recyclerViewMorning;
         });
 
 //        bottom bar
-        linear_price.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                linear_way_to_pay.setVisibility(linear_way_to_pay.VISIBLE);
-                linear_promotion.setVisibility(linear_promotion.GONE);
-                linear_note.setVisibility(linear_note.GONE);
-                app_bar_bottom.setVisibility(app_bar_bottom.GONE);
-                button_linearModel_bookWorker.setVisibility(button_linearModel_bookWorker.GONE);
-            }
-        });
-
-        imageView_esc_in_way_to_pay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                linear_way_to_pay.setVisibility(linear_way_to_pay.GONE);
-                app_bar_bottom.setVisibility(app_bar_bottom.VISIBLE);
-                button_linearModel_bookWorker.setVisibility(button_linearModel_bookWorker.VISIBLE);
-            }
-        });
-
-        text_promotion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                linear_promotion.setVisibility(linear_promotion.VISIBLE);
-                linear_way_to_pay.setVisibility(linear_way_to_pay.GONE);
-                linear_note.setVisibility(linear_note.GONE);
-                app_bar_bottom.setVisibility(app_bar_bottom.GONE);
-                button_linearModel_bookWorker.setVisibility(button_linearModel_bookWorker.GONE);
-            }
-        });
-
-        imageView_esc_in_promotion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                linear_promotion.setVisibility(linear_promotion.GONE);
-                app_bar_bottom.setVisibility(app_bar_bottom.VISIBLE);
-                button_linearModel_bookWorker.setVisibility(button_linearModel_bookWorker.VISIBLE);
-            }
-        });
-
-        text_note.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                linear_note.setVisibility(linear_note.VISIBLE);
-                linear_way_to_pay.setVisibility(linear_way_to_pay.GONE);
-                linear_promotion.setVisibility(linear_promotion.GONE);
-                app_bar_bottom.setVisibility(app_bar_bottom.GONE);
-                button_linearModel_bookWorker.setVisibility(button_linearModel_bookWorker.GONE);
-            }
-        });
-
-        imageView_esc_in_note.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                linear_note.setVisibility(linear_note.GONE);
-                app_bar_bottom.setVisibility(app_bar_bottom.VISIBLE);
-                button_linearModel_bookWorker.setVisibility(button_linearModel_bookWorker.VISIBLE);
-            }
-        });
-
-        button_linearModel_bookWorker.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onClick(View v) {
-                linear_bookSuccessful.setVisibility(linear_bookSuccessful.VISIBLE);
-                linear_time_locaion.setVisibility(linear_time_locaion.GONE);
-                linear_selectModel.setVisibility(linear_selectModel.GONE);
-                button_linearModel_bookWorker.setVisibility(button_linearModel_bookWorker.GONE);
-
-                text_linearBookSuccessful_time.setText(getString(R.string.text_thoi_gian)+ txtNhapThoiGian.getText());
-                text_linearBookSuccessful_location.setText(getString(R.string.text_dia_diem) + txtNhapViTri.getText());
-
-            }
-        });
+        setBottomBar();
 
 //        set linear choose time
         setLinearChooseTime(view);
 
     }
 
-    private void setLinearChooseTime(View view) {
-        rcMorning(view);
-        recAfternoon(view);
-        rcNight(view);
+    //        set linear choose time
+    public String day ="";
 
+    private void setLinearChooseTime(View view) {
         text_chooseTime_morning = view.findViewById(R.id.text_chooseTime_morning);
         text_chooseTime_afternoon = view.findViewById(R.id.text_chooseTime_afternoon);
         text_chooseTime_night = view.findViewById(R.id.text_chooseTime_night);
@@ -394,46 +338,15 @@ private RecyclerView recyclerViewMorning;
             }
         });
 
+        rcMorning(view);
+        recAfternoon(view);
+        rcNight(view);
+    }
+
+    private void chooseDay(View view){
         text_chooseTime_day1 = view.findViewById(R.id.text_chooseTime_day1);
         text_chooseTime_day2 = view.findViewById(R.id.text_chooseTime_day2);
         text_chooseTime_day3 = view.findViewById(R.id.text_chooseTime_day3);
-
-        text_chooseTime_day1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                text_chooseTime_day1.setBackgroundResource(R.drawable.shape_round_full_pink);
-                text_chooseTime_day1.setTextColor(getResources().getColor(R.color.white));
-                text_chooseTime_day2.setBackgroundResource(R.drawable.shape_round_not_full_pink);
-                text_chooseTime_day2.setTextColor(getResources().getColor(R.color.pink_theme));
-                text_chooseTime_day3.setBackgroundResource(R.drawable.shape_round_not_full_pink);
-                text_chooseTime_day3.setTextColor(getResources().getColor(R.color.pink_theme));
-
-            }
-        });
-
-        text_chooseTime_day2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                text_chooseTime_day2.setBackgroundResource(R.drawable.shape_round_full_pink);
-                text_chooseTime_day2.setTextColor(getResources().getColor(R.color.white));
-                text_chooseTime_day1.setBackgroundResource(R.drawable.shape_round_not_full_pink);
-                text_chooseTime_day1.setTextColor(getResources().getColor(R.color.pink_theme));
-                text_chooseTime_day3.setBackgroundResource(R.drawable.shape_round_not_full_pink);
-                text_chooseTime_day3.setTextColor(getResources().getColor(R.color.pink_theme));
-            }
-        });
-
-        text_chooseTime_day3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                text_chooseTime_day3.setBackgroundResource(R.drawable.shape_round_full_pink);
-                text_chooseTime_day3.setTextColor(getResources().getColor(R.color.white));
-                text_chooseTime_day1.setBackgroundResource(R.drawable.shape_round_not_full_pink);
-                text_chooseTime_day1.setTextColor(getResources().getColor(R.color.pink_theme));
-                text_chooseTime_day2.setBackgroundResource(R.drawable.shape_round_not_full_pink);
-                text_chooseTime_day2.setTextColor(getResources().getColor(R.color.pink_theme));
-            }
-        });
 
         Calendar calendar = Calendar.getInstance();
 
@@ -448,6 +361,48 @@ private RecyclerView recyclerViewMorning;
         text_chooseTime_day1.setText(day1 + "/" + month);
         text_chooseTime_day2.setText(day2 + "/" + month);
         text_chooseTime_day3.setText(day3 + "/" + month);
+
+        text_chooseTime_day1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                text_chooseTime_day1.setBackgroundResource(R.drawable.shape_round_full_pink);
+                text_chooseTime_day1.setTextColor(getResources().getColor(R.color.white));
+                text_chooseTime_day2.setBackgroundResource(R.drawable.shape_round_not_full_pink);
+                text_chooseTime_day2.setTextColor(getResources().getColor(R.color.pink_theme));
+                text_chooseTime_day3.setBackgroundResource(R.drawable.shape_round_not_full_pink);
+                text_chooseTime_day3.setTextColor(getResources().getColor(R.color.pink_theme));
+
+                day = (String) text_chooseTime_day1.getText();
+            }
+        });
+
+        text_chooseTime_day2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                text_chooseTime_day2.setBackgroundResource(R.drawable.shape_round_full_pink);
+                text_chooseTime_day2.setTextColor(getResources().getColor(R.color.white));
+                text_chooseTime_day1.setBackgroundResource(R.drawable.shape_round_not_full_pink);
+                text_chooseTime_day1.setTextColor(getResources().getColor(R.color.pink_theme));
+                text_chooseTime_day3.setBackgroundResource(R.drawable.shape_round_not_full_pink);
+                text_chooseTime_day3.setTextColor(getResources().getColor(R.color.pink_theme));
+
+                day = (String) text_chooseTime_day2.getText();
+            }
+        });
+
+        text_chooseTime_day3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                text_chooseTime_day3.setBackgroundResource(R.drawable.shape_round_full_pink);
+                text_chooseTime_day3.setTextColor(getResources().getColor(R.color.white));
+                text_chooseTime_day1.setBackgroundResource(R.drawable.shape_round_not_full_pink);
+                text_chooseTime_day1.setTextColor(getResources().getColor(R.color.pink_theme));
+                text_chooseTime_day2.setBackgroundResource(R.drawable.shape_round_not_full_pink);
+                text_chooseTime_day2.setTextColor(getResources().getColor(R.color.pink_theme));
+
+                day = (String) text_chooseTime_day3.getText();
+            }
+        });
     }
 
 //    Choose time
@@ -455,7 +410,8 @@ private RecyclerView recyclerViewMorning;
         recyclerViewNight =  view.findViewById(R.id.rc_timeNight);
 
         timeListNight = new ArrayList<>();
-        adapterNight = new TimeAdapter(getContext(), timeListNight);
+        chooseDay(view);
+        adapterNight = new TimeAdapter(getContext(), timeListNight, text_linearTimeLocation_enterTime, day);
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 3);
         recyclerViewNight.setLayoutManager(mLayoutManager);
@@ -463,6 +419,8 @@ private RecyclerView recyclerViewMorning;
         recyclerViewNight.setItemAnimator(new DefaultItemAnimator());
         recyclerViewNight.setAdapter(adapterNight);
 
+//        hour = adapterNight.getHour();
+//        text_linearTimeLocation_enterTime.setText(hour + " - " + day);
         prepareAlbumsNight();
     }
 
@@ -470,7 +428,8 @@ private RecyclerView recyclerViewMorning;
         recyclerViewAfternoon =  view.findViewById(R.id.rc_timeAfternoon);
 
         timeListAfternoon = new ArrayList<>();
-        adapterAfternoon = new TimeAdapter(getContext(), timeListAfternoon);
+        chooseDay(view);
+        adapterAfternoon = new TimeAdapter(getContext(), timeListAfternoon, text_linearTimeLocation_enterTime, day);
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 3);
         recyclerViewAfternoon.setLayoutManager(mLayoutManager);
@@ -478,6 +437,8 @@ private RecyclerView recyclerViewMorning;
         recyclerViewAfternoon.setItemAnimator(new DefaultItemAnimator());
         recyclerViewAfternoon.setAdapter(adapterAfternoon);
 
+//        hour = adapterAfternoon.getHour();
+//        text_linearTimeLocation_enterTime.setText(hour + " - " + day);
         prepareAlbumsAfternoon();
 
     }
@@ -487,7 +448,8 @@ private RecyclerView recyclerViewMorning;
         recyclerViewMorning =  view.findViewById(R.id.rc_time);
 
         timeListMorning = new ArrayList<>();
-        adapterMorning = new TimeAdapter(getContext(), timeListMorning);
+        chooseDay(view);
+        adapterMorning = new TimeAdapter(getContext(), timeListMorning, text_linearTimeLocation_enterTime, day);
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 3);
         recyclerViewMorning.setLayoutManager(mLayoutManager);
@@ -495,6 +457,8 @@ private RecyclerView recyclerViewMorning;
         recyclerViewMorning.setItemAnimator(new DefaultItemAnimator());
         recyclerViewMorning.setAdapter(adapterMorning);
 
+//        hour = adapterMorning.getHour();
+//        text_linearTimeLocation_enterTime.setText(hour + " - " + day);
         prepareAlbumsMoring();
     }
 
@@ -637,49 +601,6 @@ private RecyclerView recyclerViewMorning;
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
 
-// Add id
-    private void addControls(View root) {
-
-        txtNhapViTri = root.findViewById(R.id.txtNhapViTri);
-        txtNhapThoiGian = root.findViewById(R.id.txtNhapThoiGian);
-
-        txtSearchingWorker = root.findViewById(R.id.txtSearchingWorker);
-
-        btnOK = root.findViewById(R.id.btnOK);
-        btnSearchWoker = root.findViewById(R.id.btnSearchWoker);
-        btnOKInSearchLocation = root.findViewById(R.id.btnOKInSearchLocation);
-
-        linear_chooseTime = root.findViewById(R.id.linear_chooseTime);
-        linear_time_locaion = root.findViewById(R.id.linear_time_locaion);
-
-        linear_way_to_pay = root.findViewById(R.id.linear_way_to_pay);
-        linear_promotion = root.findViewById(R.id.linear_promotion);
-        linear_note = root.findViewById(R.id.linear_note);
-
-        linear_selectModel = root.findViewById(R.id.linear_selectModel);
-
-        searchView = root.findViewById(R.id.sv_location);
-
-        imageView_three_dots = root.findViewById(R.id.imageView_three_dots);
-        imageView_esc_in_way_to_pay = root.findViewById(R.id.imageView_esc_in_way_to_pay);
-        imageView_esc_in_promotion = root.findViewById(R.id.imageView_esc_in_promotion);
-        imageView_esc_in_note = root.findViewById(R.id.imageView_esc_in_note);
-
-        linear_price = root.findViewById(R.id.linear_price);
-        text_promotion = root.findViewById(R.id.text_promotion);
-        text_note = root.findViewById(R.id.text_note);
-        app_bar_bottom = root.findViewById(R.id.app_bar_bottom);
-
-        button_linearModel_bookWorker = root.findViewById(R.id.button_linearModel_bookWorker);
-        linear_bookSuccessful = root.findViewById(R.id.linear_bookSuccessful);
-
-        text_linearBookSuccessful_selectedModel = root.findViewById(R.id.text_linearBookSuccessful_selectedModel);
-        text_linearBookSuccessful_selectedModelPrice = root.findViewById(R.id.text_linearBookSuccessful_selectedModelPrice);
-        text_linearBookSuccessful_location = root.findViewById(R.id.text_linearBookSuccessful_location);
-        text_linearBookSuccessful_time = root.findViewById(R.id.text_linearBookSuccessful_time);
-        image_linearBookSuccessful_selectedModel = root.findViewById(R.id.image_linearBookSuccessful_selectedModel);
-    }
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -688,6 +609,84 @@ private RecyclerView recyclerViewMorning;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    //        bottom bar
+    private void setBottomBar() {
+        linear_price.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linear_way_to_pay.setVisibility(linear_way_to_pay.VISIBLE);
+                linear_promotion.setVisibility(linear_promotion.GONE);
+                linear_note.setVisibility(linear_note.GONE);
+                app_bar_bottom.setVisibility(app_bar_bottom.GONE);
+                button_linearModel_bookWorker.setVisibility(button_linearModel_bookWorker.GONE);
+            }
+        });
+
+        imageView_esc_in_way_to_pay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linear_way_to_pay.setVisibility(linear_way_to_pay.GONE);
+                app_bar_bottom.setVisibility(app_bar_bottom.VISIBLE);
+                button_linearModel_bookWorker.setVisibility(button_linearModel_bookWorker.VISIBLE);
+            }
+        });
+
+        text_promotion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linear_promotion.setVisibility(linear_promotion.VISIBLE);
+                linear_way_to_pay.setVisibility(linear_way_to_pay.GONE);
+                linear_note.setVisibility(linear_note.GONE);
+                app_bar_bottom.setVisibility(app_bar_bottom.GONE);
+                button_linearModel_bookWorker.setVisibility(button_linearModel_bookWorker.GONE);
+            }
+        });
+
+        imageView_esc_in_promotion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linear_promotion.setVisibility(linear_promotion.GONE);
+                app_bar_bottom.setVisibility(app_bar_bottom.VISIBLE);
+                button_linearModel_bookWorker.setVisibility(button_linearModel_bookWorker.VISIBLE);
+            }
+        });
+
+        text_note.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linear_note.setVisibility(linear_note.VISIBLE);
+                linear_way_to_pay.setVisibility(linear_way_to_pay.GONE);
+                linear_promotion.setVisibility(linear_promotion.GONE);
+                app_bar_bottom.setVisibility(app_bar_bottom.GONE);
+                button_linearModel_bookWorker.setVisibility(button_linearModel_bookWorker.GONE);
+            }
+        });
+
+        imageView_esc_in_note.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linear_note.setVisibility(linear_note.GONE);
+                app_bar_bottom.setVisibility(app_bar_bottom.VISIBLE);
+                button_linearModel_bookWorker.setVisibility(button_linearModel_bookWorker.VISIBLE);
+            }
+        });
+
+        button_linearModel_bookWorker.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View v) {
+                linear_bookSuccessful.setVisibility(linear_bookSuccessful.VISIBLE);
+                linear_time_locaion.setVisibility(linear_time_locaion.GONE);
+                linear_selectModel.setVisibility(linear_selectModel.GONE);
+                button_linearModel_bookWorker.setVisibility(button_linearModel_bookWorker.GONE);
+
+                text_linearBookSuccessful_time.setText(getString(R.string.text_thoi_gian)+ text_linearTimeLocation_enterTime.getText());
+                text_linearBookSuccessful_location.setText(getString(R.string.text_dia_diem) + text_linearTimeLocation_enterLocation.getText());
+
+            }
+        });
     }
 
     private void timeCountDown() {
@@ -705,6 +704,12 @@ private RecyclerView recyclerViewMorning;
 
 
 //    MAP
+    private void setMap() {
+        SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+    }
+    
     public void onMapSearch(View view) {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -757,6 +762,7 @@ private RecyclerView recyclerViewMorning;
             mMap.setMyLocationEnabled(true);
         }
     }
+    
     protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(getContext())
                 .addConnectionCallbacks(this)
@@ -765,6 +771,7 @@ private RecyclerView recyclerViewMorning;
                 .build();
         mGoogleApiClient.connect();
     }
+    
     @Override
     public void onConnected(Bundle bundle) {
         mLocationRequest = new LocationRequest();
@@ -778,9 +785,11 @@ private RecyclerView recyclerViewMorning;
                     mLocationRequest, this);
         }
     }
+    
     @Override
     public void onConnectionSuspended(int i) {
     }
+    
     @Override
     public void onLocationChanged(Location location) {
         mLastLocation = location;
@@ -836,6 +845,7 @@ private RecyclerView recyclerViewMorning;
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
     }
+    
     public boolean checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(getContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION)
@@ -881,6 +891,20 @@ private RecyclerView recyclerViewMorning;
     }
 
 //    RecyclerView mau mong
+    private void setRecyclerView(View root) {
+        recyclerView = root.findViewById(R.id.rv_model);
+        txtMoney = root.findViewById(R.id.txtMoney);
+    
+        modelList = new ArrayList<>();
+        adapter = new ModelAdapter(getContext(), modelList, txtMoney, text_linearBookSuccessful_selectedModel,
+                text_linearBookSuccessful_selectedModelPrice, image_linearBookSuccessful_selectedModel);
+    
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setAdapter(adapter);
+    
+        prepareAlbums();
+    }
     private void prepareAlbums() {
         int[] covers = new int[]{
                 R.drawable.md1,

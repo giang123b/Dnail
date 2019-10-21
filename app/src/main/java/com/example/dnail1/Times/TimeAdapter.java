@@ -17,6 +17,10 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.MyViewHolder> 
     private Context mContext;
     private List<Time> timeList;
     private int selectedPosition=-1;
+    private String hour="";
+    TextView text_linearTimeLocation_enterTime;
+    String day;
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView time;
@@ -27,9 +31,11 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.MyViewHolder> 
         }
     }
 
-    public TimeAdapter(Context mContext, List<Time> timeList) {
+    public TimeAdapter(Context mContext, List<Time> timeList, TextView text_linearTimeLocation_enterTime, String day) {
         this.mContext = mContext;
         this.timeList = timeList;
+        this.text_linearTimeLocation_enterTime = text_linearTimeLocation_enterTime;
+        this.day = day;
     }
 
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -45,7 +51,7 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.MyViewHolder> 
 
         if(selectedPosition==position){
 //            holder.itemView.setBackgroundColor(Color.parseColor("#E91E63"));
-            holder.itemView.setBackgroundResource(R.drawable.shape_round_not_full_pink);
+            holder.itemView.setBackgroundResource(R.drawable.shape_round_full_pink);
             holder.time.setTextColor(mContext.getResources().getColor(R.color.white));
         }
         else{
@@ -57,6 +63,9 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.MyViewHolder> 
             @Override
             public void onClick(View v) {
                 selectedPosition = position;
+                hour = timeList.get(selectedPosition).getTime();
+
+                text_linearTimeLocation_enterTime.setText(hour + " - " + day);
                 notifyDataSetChanged();
             }
         });
