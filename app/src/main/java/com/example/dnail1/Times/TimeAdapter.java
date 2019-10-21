@@ -64,7 +64,8 @@ public class TimeAdapter extends RecyclerView.Adapter<TimeAdapter.MyViewHolder> 
             public void onClick(View v) {
                 selectedPosition = position;
                 hour = timeList.get(selectedPosition).getTime();
-
+                day = (String) text_linearTimeLocation_enterTime.getText();
+                day = day.substring(text_linearTimeLocation_enterTime.getText().length() - 5, text_linearTimeLocation_enterTime.getText().length());
                 text_linearTimeLocation_enterTime.setText(hour + " - " + day);
                 notifyDataSetChanged();
             }

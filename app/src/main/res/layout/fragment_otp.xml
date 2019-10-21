@@ -45,6 +45,7 @@
         android:textSize="20sp"
         app:pinAnimationType="popIn"
         android:layout_gravity="center"
+        android:imeOptions="actionDone"
         />
 
     <TextView

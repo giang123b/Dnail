@@ -87,12 +87,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     TextView text_linearTimeLocation_enterLocation;
     TextView text_linearTimeLocation_enterTime;
 
-    TextView txtChonNgay;
-    TextView txtCpink_themeio;
-
     TextView txtSearchingWorker;
-
-
 
     MaterialButton btnOK;
     MaterialButton btnSearchWoker;
@@ -120,8 +115,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     CountDownTimer w;
 
     RecyclerView recyclerView;
+    RecyclerView recyclerViewPhu;
     private ModelAdapter adapter;
+    private ModelAdapter adapterPhu;
     private List<Model> modelList;
+    private List<Model> modelListPhu;
 
     ImageView imageView_three_dots, imageView_esc_in_way_to_pay, imageView_esc_in_promotion, imageView_esc_in_note;
 
@@ -131,6 +129,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             text_linearBookSuccessful_time, text_linearBookSuccessful_location;
     ImageView image_linearBookSuccessful_selectedModel;
 
+    TextView vote;
+    TextView vote1;
 //    choose time
     private RecyclerView recyclerViewMorning;
     private RecyclerView recyclerViewAfternoon;
@@ -146,6 +146,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
     private TextView text_chooseTime_day1, text_chooseTime_day2, text_chooseTime_day3;
 
+    ImageView imageView_linearBookSuccessful_threeDots;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -158,6 +160,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         onMapSearch(root);
 
         setRecyclerView(root);
+        setRecyclerViewPhu(root);
 
         setMap();
 
@@ -205,6 +208,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         text_linearBookSuccessful_location = root.findViewById(R.id.text_linearBookSuccessful_location);
         text_linearBookSuccessful_time = root.findViewById(R.id.text_linearBookSuccessful_time);
         image_linearBookSuccessful_selectedModel = root.findViewById(R.id.image_linearBookSuccessful_selectedModel);
+
+        vote = root.findViewById(R.id.text_linearSelectModel_vote);
+        vote1 = root.findViewById(R.id.text_linearSelectModel_vote1);
+
+        recyclerView = root.findViewById(R.id.rv_model);
+        recyclerViewPhu = root.findViewById(R.id.rv_model1);
+
+        imageView_linearBookSuccessful_threeDots = root.findViewById(R.id.imageView_linearBookSuccessful_threeDots);
+
     }
 
     private void addEvents(View view) {
@@ -270,7 +282,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         imageView_three_dots.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showPopupMenu(v);
+                showPopupMenuInSelectModel(v);
+            }
+        });
+
+        imageView_linearBookSuccessful_threeDots.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopupMenuInBookSuccessful(v);
             }
         });
 
@@ -286,6 +305,72 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     public String day ="";
 
     private void setLinearChooseTime(View view) {
+
+        text_chooseTime_day1 = view.findViewById(R.id.text_chooseTime_day1);
+        text_chooseTime_day2 = view.findViewById(R.id.text_chooseTime_day2);
+        text_chooseTime_day3 = view.findViewById(R.id.text_chooseTime_day3);
+
+        Calendar calendar = Calendar.getInstance();
+
+        SimpleDateFormat simpleDateFormatDay = new SimpleDateFormat("dd");
+        SimpleDateFormat simpleDateFormatMonth = new SimpleDateFormat("MM");
+        String month = simpleDateFormatMonth.format(calendar.getTime());
+
+        String day1 = String.valueOf(Integer.parseInt(simpleDateFormatDay.format(calendar.getTime())));
+        String day2 = String.valueOf(Integer.parseInt(simpleDateFormatDay.format(calendar.getTime())) + 1);
+        String day3 = String.valueOf(Integer.parseInt(simpleDateFormatDay.format(calendar.getTime())) + 2);
+
+        text_chooseTime_day1.setText(day1 + "/" + month);
+        text_chooseTime_day2.setText(day2 + "/" + month);
+        text_chooseTime_day3.setText(day3 + "/" + month);
+
+        day = (String) text_chooseTime_day1.getText();
+
+        text_chooseTime_day1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                text_chooseTime_day1.setBackgroundResource(R.drawable.shape_round_full_pink);
+                text_chooseTime_day1.setTextColor(getResources().getColor(R.color.white));
+                text_chooseTime_day2.setBackgroundResource(R.drawable.shape_round_not_full_pink);
+                text_chooseTime_day2.setTextColor(getResources().getColor(R.color.pink_theme));
+                text_chooseTime_day3.setBackgroundResource(R.drawable.shape_round_not_full_pink);
+                text_chooseTime_day3.setTextColor(getResources().getColor(R.color.pink_theme));
+
+                day = (String) text_chooseTime_day1.getText();
+                text_linearTimeLocation_enterTime.setText(day);
+            }
+        });
+
+        text_chooseTime_day2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                text_chooseTime_day2.setBackgroundResource(R.drawable.shape_round_full_pink);
+                text_chooseTime_day2.setTextColor(getResources().getColor(R.color.white));
+                text_chooseTime_day1.setBackgroundResource(R.drawable.shape_round_not_full_pink);
+                text_chooseTime_day1.setTextColor(getResources().getColor(R.color.pink_theme));
+                text_chooseTime_day3.setBackgroundResource(R.drawable.shape_round_not_full_pink);
+                text_chooseTime_day3.setTextColor(getResources().getColor(R.color.pink_theme));
+
+                day = (String) text_chooseTime_day2.getText();
+                text_linearTimeLocation_enterTime.setText(day);
+            }
+        });
+
+        text_chooseTime_day3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                text_chooseTime_day3.setBackgroundResource(R.drawable.shape_round_full_pink);
+                text_chooseTime_day3.setTextColor(getResources().getColor(R.color.white));
+                text_chooseTime_day1.setBackgroundResource(R.drawable.shape_round_not_full_pink);
+                text_chooseTime_day1.setTextColor(getResources().getColor(R.color.pink_theme));
+                text_chooseTime_day2.setBackgroundResource(R.drawable.shape_round_not_full_pink);
+                text_chooseTime_day2.setTextColor(getResources().getColor(R.color.pink_theme));
+
+                day = (String) text_chooseTime_day3.getText();
+                text_linearTimeLocation_enterTime.setText(day);
+            }
+        });
+
         text_chooseTime_morning = view.findViewById(R.id.text_chooseTime_morning);
         text_chooseTime_afternoon = view.findViewById(R.id.text_chooseTime_afternoon);
         text_chooseTime_night = view.findViewById(R.id.text_chooseTime_night);
@@ -343,75 +428,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         rcNight(view);
     }
 
-    private void chooseDay(View view){
-        text_chooseTime_day1 = view.findViewById(R.id.text_chooseTime_day1);
-        text_chooseTime_day2 = view.findViewById(R.id.text_chooseTime_day2);
-        text_chooseTime_day3 = view.findViewById(R.id.text_chooseTime_day3);
-
-        Calendar calendar = Calendar.getInstance();
-
-        SimpleDateFormat simpleDateFormatDay = new SimpleDateFormat("dd");
-        SimpleDateFormat simpleDateFormatMonth = new SimpleDateFormat("MM");
-        String month = simpleDateFormatMonth.format(calendar.getTime());
-
-        String day1 = String.valueOf(Integer.parseInt(simpleDateFormatDay.format(calendar.getTime())));
-        String day2 = String.valueOf(Integer.parseInt(simpleDateFormatDay.format(calendar.getTime())) + 1);
-        String day3 = String.valueOf(Integer.parseInt(simpleDateFormatDay.format(calendar.getTime())) + 2);
-
-        text_chooseTime_day1.setText(day1 + "/" + month);
-        text_chooseTime_day2.setText(day2 + "/" + month);
-        text_chooseTime_day3.setText(day3 + "/" + month);
-
-        text_chooseTime_day1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                text_chooseTime_day1.setBackgroundResource(R.drawable.shape_round_full_pink);
-                text_chooseTime_day1.setTextColor(getResources().getColor(R.color.white));
-                text_chooseTime_day2.setBackgroundResource(R.drawable.shape_round_not_full_pink);
-                text_chooseTime_day2.setTextColor(getResources().getColor(R.color.pink_theme));
-                text_chooseTime_day3.setBackgroundResource(R.drawable.shape_round_not_full_pink);
-                text_chooseTime_day3.setTextColor(getResources().getColor(R.color.pink_theme));
-
-                day = (String) text_chooseTime_day1.getText();
-            }
-        });
-
-        text_chooseTime_day2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                text_chooseTime_day2.setBackgroundResource(R.drawable.shape_round_full_pink);
-                text_chooseTime_day2.setTextColor(getResources().getColor(R.color.white));
-                text_chooseTime_day1.setBackgroundResource(R.drawable.shape_round_not_full_pink);
-                text_chooseTime_day1.setTextColor(getResources().getColor(R.color.pink_theme));
-                text_chooseTime_day3.setBackgroundResource(R.drawable.shape_round_not_full_pink);
-                text_chooseTime_day3.setTextColor(getResources().getColor(R.color.pink_theme));
-
-                day = (String) text_chooseTime_day2.getText();
-            }
-        });
-
-        text_chooseTime_day3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                text_chooseTime_day3.setBackgroundResource(R.drawable.shape_round_full_pink);
-                text_chooseTime_day3.setTextColor(getResources().getColor(R.color.white));
-                text_chooseTime_day1.setBackgroundResource(R.drawable.shape_round_not_full_pink);
-                text_chooseTime_day1.setTextColor(getResources().getColor(R.color.pink_theme));
-                text_chooseTime_day2.setBackgroundResource(R.drawable.shape_round_not_full_pink);
-                text_chooseTime_day2.setTextColor(getResources().getColor(R.color.pink_theme));
-
-                day = (String) text_chooseTime_day3.getText();
-            }
-        });
-    }
-
 //    Choose time
     private void rcNight(View view) {
         recyclerViewNight =  view.findViewById(R.id.rc_timeNight);
 
         timeListNight = new ArrayList<>();
-        chooseDay(view);
-        adapterNight = new TimeAdapter(getContext(), timeListNight, text_linearTimeLocation_enterTime, day);
+        adapterNight = new TimeAdapter(getContext(), timeListNight, text_linearTimeLocation_enterTime,
+                (String) text_linearTimeLocation_enterTime.getText());
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 3);
         recyclerViewNight.setLayoutManager(mLayoutManager);
@@ -419,8 +442,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         recyclerViewNight.setItemAnimator(new DefaultItemAnimator());
         recyclerViewNight.setAdapter(adapterNight);
 
-//        hour = adapterNight.getHour();
-//        text_linearTimeLocation_enterTime.setText(hour + " - " + day);
         prepareAlbumsNight();
     }
 
@@ -428,8 +449,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         recyclerViewAfternoon =  view.findViewById(R.id.rc_timeAfternoon);
 
         timeListAfternoon = new ArrayList<>();
-        chooseDay(view);
-        adapterAfternoon = new TimeAdapter(getContext(), timeListAfternoon, text_linearTimeLocation_enterTime, day);
+//        chooseDay(view);
+        adapterAfternoon = new TimeAdapter(getContext(), timeListAfternoon, text_linearTimeLocation_enterTime,
+                (String) text_linearTimeLocation_enterTime.getText());
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 3);
         recyclerViewAfternoon.setLayoutManager(mLayoutManager);
@@ -448,8 +470,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         recyclerViewMorning =  view.findViewById(R.id.rc_time);
 
         timeListMorning = new ArrayList<>();
-        chooseDay(view);
-        adapterMorning = new TimeAdapter(getContext(), timeListMorning, text_linearTimeLocation_enterTime, day);
+//        chooseDay(view);
+        adapterMorning = new TimeAdapter(getContext(), timeListMorning, text_linearTimeLocation_enterTime,
+                (String) text_linearTimeLocation_enterTime.getText());
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 3);
         recyclerViewMorning.setLayoutManager(mLayoutManager);
@@ -797,7 +820,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             mCurrLocationMarker.remove();
         }
 
-//Showing Current Location Marker on Map
+        //Showing Current Location Marker on Map
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
@@ -892,7 +915,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
 //    RecyclerView mau mong
     private void setRecyclerView(View root) {
-        recyclerView = root.findViewById(R.id.rv_model);
         txtMoney = root.findViewById(R.id.txtMoney);
     
         modelList = new ArrayList<>();
@@ -905,6 +927,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     
         prepareAlbums();
     }
+
     private void prepareAlbums() {
         int[] covers = new int[]{
                 R.drawable.md1,
@@ -912,14 +935,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                 R.drawable.md4,
                 R.drawable.md5,
                 R.drawable.md6,
-                R.drawable.md2,
-                R.drawable.md2,
-                R.drawable.md2,
-                R.drawable.md6,
-                R.drawable.md6,
-                R.drawable.md6,
-                R.drawable.md6,
-                R.drawable.md6,
+                R.drawable.md3,
+                R.drawable.md7,
+                R.drawable.md8,
+                R.drawable.md9,
+                R.drawable.md10,
+                R.drawable.md11,
+                R.drawable.md12,
+                R.drawable.md13,
         };
 
         Model a = new Model("Mẫu 1", 120, covers[0]);
@@ -959,7 +982,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     /**
      * Showing popup menu when tapping on 3 dots
      */
-    private void showPopupMenu(View view) {
+    private void showPopupMenuInSelectModel(View view) {
         // inflate menu
         PopupMenu popup = new PopupMenu(getContext(), view);
         MenuInflater inflater = popup.getMenuInflater();
@@ -971,6 +994,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     /**
      * Click listener for popup menu items
      */
+    int refesh = 1;
     class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
 
         public MyMenuItemClickListener() {
@@ -979,13 +1003,130 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         public boolean onMenuItemClick(MenuItem menuItem) {
             switch (menuItem.getItemId()) {
                 case R.id.refresh_worker:
-                    linear_selectModel.setVisibility(linear_selectModel.GONE);
-                    btnSearchWoker.setVisibility(btnSearchWoker.VISIBLE);
-                    btnSearchWoker.setText(R.string.text_tim_tho_mong);
+                    if (refesh > 0){
+                        refesh = -1;
+                        linear_selectModel.setVisibility(linear_selectModel.GONE);
+                        recyclerView.setVisibility(recyclerView.GONE);
+
+                        txtSearchingWorker.setVisibility(txtSearchingWorker.VISIBLE);
+                        recyclerViewPhu.setVisibility(recyclerViewPhu.VISIBLE);
+
+                        vote.setVisibility(vote.GONE);
+                        vote1.setVisibility(vote1.VISIBLE);
+
+                        timeCountDown();
+                    }
+                    else{
+                        refesh = 1;
+                        linear_selectModel.setVisibility(linear_selectModel.GONE);
+                        recyclerViewPhu.setVisibility(recyclerViewPhu.GONE);
+
+                        txtSearchingWorker.setVisibility(txtSearchingWorker.VISIBLE);
+                        recyclerView.setVisibility(recyclerView.VISIBLE);
+
+                        vote1.setVisibility(vote1.GONE);
+                        vote.setVisibility(vote.VISIBLE);
+
+                        timeCountDown();
+                    }
                     return true;
                 default:
             }
             return false;
         }
+    }
+
+    private void showPopupMenuInBookSuccessful(View view) {
+        // inflate menu
+        PopupMenu popup = new PopupMenu(getContext(), view);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.menu_complete_book, popup.getMenu());
+        popup.setOnMenuItemClickListener(new MyMenuItemClickListenerInBookSuccessful());
+        popup.show();
+    }
+
+    /**
+     * Click listener for popup menu items
+     */
+    class MyMenuItemClickListenerInBookSuccessful implements PopupMenu.OnMenuItemClickListener {
+
+        public MyMenuItemClickListenerInBookSuccessful() {
+        }
+
+        public boolean onMenuItemClick(MenuItem menuItem) {
+            switch (menuItem.getItemId()) {
+                case R.id.refresh_worker:
+                    linear_bookSuccessful.setVisibility(linear_bookSuccessful.GONE);
+                    linear_time_locaion.setVisibility(linear_time_locaion.VISIBLE);
+                    return true;
+                default:
+            }
+            return false;
+        }
+    }
+
+    // recyclerview Phu
+    private void setRecyclerViewPhu(View root) {
+        txtMoney = root.findViewById(R.id.txtMoney);
+
+        modelListPhu = new ArrayList<>();
+        adapterPhu = new ModelAdapter(getContext(), modelListPhu, txtMoney, text_linearBookSuccessful_selectedModel,
+                text_linearBookSuccessful_selectedModelPrice, image_linearBookSuccessful_selectedModel);
+
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewPhu.setLayoutManager(mLayoutManager);
+        recyclerViewPhu.setAdapter(adapterPhu);
+
+        prepareAlbumsPhu();
+    }
+
+    private void prepareAlbumsPhu() {
+        int[] covers = new int[]{
+                R.drawable.md10,
+                R.drawable.md11,
+                R.drawable.md12,
+                R.drawable.md13,
+                R.drawable.md6,
+                R.drawable.md3,
+                R.drawable.md7,
+                R.drawable.md8,
+                R.drawable.md9,
+                R.drawable.md1,
+                R.drawable.md2,
+                R.drawable.md4,
+                R.drawable.md5,
+        };
+
+        Model a = new Model("Mẫu 1", 250, covers[0]);
+        modelListPhu.add(a);
+
+        a = new Model("Mẫu 2", 100, covers[1]);
+        modelListPhu.add(a);
+
+        a = new Model("Mẫu 3", 90, covers[2]);
+        modelListPhu.add(a);
+
+        a = new Model("Mẫu 4", 400, covers[3]);
+        modelListPhu.add(a);
+
+        a = new Model("Mẫu 5", 75, covers[4]);
+        modelListPhu.add(a);
+
+        a = new Model("Mẫu 6", 200, covers[5]);
+        modelListPhu.add(a);
+
+        a = new Model("Mẫu 7", 120, covers[6]);
+        modelListPhu.add(a);
+
+        a = new Model("Mẫu 8", 110, covers[7]);
+        modelListPhu.add(a);
+
+        a = new Model("Mẫu 9", 90, covers[8]);
+        modelListPhu.add(a);
+
+        a = new Model("Mẫu 10", 100, covers[9]);
+        modelListPhu.add(a);
+
+        adapterPhu.notifyDataSetChanged();
     }
 }

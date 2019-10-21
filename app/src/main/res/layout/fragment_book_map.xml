@@ -19,22 +19,20 @@
             android:id="@+id/app_bar"
             style="@style/Widget.Shrine.Toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:paddingStart="12dp"
+            android:layout_height="wrap_content"
             android:paddingLeft="12dp"
-            android:paddingEnd="12dp"
-            android:paddingRight="12dp"
-            app:contentInsetStart="0dp"
+            android:padding="0dp"
             app:title="@string/app_name" />
-
+<!--        android:layout_height="?attr/actionBarSize" -->
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="30dp"
             android:background="?attr/colorPrimary"
             app:tabIndicatorColor="@color/white"
             app:tabSelectedTextColor="@color/white"
+            android:padding="0dp"
             />
 
         <androidx.viewpager.widget.ViewPager
@@ -55,7 +53,6 @@
         android:layout_gravity="start"
         app:headerLayout="@layout/drawer_header"
         >
-
     </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>

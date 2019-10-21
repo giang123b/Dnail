@@ -123,9 +123,9 @@
                         android:text="19/10"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:background="@drawable/shape_round_not_full_pink"
+                        android:background="@drawable/shape_round_full_pink"
                         android:layout_margin="4dp"
-                        android:textColor="@color/pink_theme"
+                        android:textColor="@color/white"
                         />
 
                     <TextView
@@ -164,9 +164,9 @@
                         android:text="@string/text_buoi_sang"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:background="@drawable/shape_round_not_full_pink"
+                        android:background="@drawable/shape_round_full_pink"
                         android:layout_margin="4dp"
-                        android:textColor="@color/pink_theme"
+                        android:textColor="@color/white"
                         />
                     <TextView
                         android:id="@+id/text_chooseTime_afternoon"
@@ -238,7 +238,7 @@
             android:visibility="gone"
             />
 
-        <!-- Thanh chon mau -->
+        <!-- Thanh chon mau chinh -->
         <LinearLayout
             android:id="@+id/linear_selectModel"
             android:layout_width="match_parent"
@@ -248,16 +248,22 @@
             android:layout_marginBottom="@dimen/margin_bottom"
             android:visibility="gone"
             >
-            <TextView
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/not_pink"
-                android:text="@string/text_da_tim_duoc_tho_phu_hop"
-                android:textColor="@color/black"
-                android:padding="@dimen/padding_material_8dp"
-                android:gravity="center"
-                />
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/not_pink"
+                    android:text="@string/text_da_tim_duoc_tho_phu_hop"
+                    android:textColor="@color/black"
+                    android:padding="@dimen/padding_material_8dp"
+                    android:gravity="center"
+                    />
+            </androidx.cardview.widget.CardView>
             <TextView
+                android:id="@+id/text_linearSelectModel_vote"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/not_white"
@@ -268,21 +274,47 @@
                 android:gravity="center|left"
                 />
             <TextView
+                android:id="@+id/text_linearSelectModel_vote1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/not_pink"
-                android:text="@string/text_cac_mau_noi_bat"
+                android:background="@color/not_white"
+                android:text="Đánh giá: 4 sao/30 lượt đánh giá"
                 android:textColor="@color/black"
-                android:padding="@dimen/padding_material_8dp"
-                android:gravity="center"
+                android:padding="@dimen/padding_material_4dp"
+                android:drawableLeft="@drawable/ic_check_black_24dp"
+                android:gravity="center|left"
+                android:visibility="gone"
                 />
-            <!--Recycler view danh sach cac mau mong-->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_model"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#E6FFFFFF"
-                />
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/not_pink"
+                    android:text="@string/text_cac_mau_noi_bat"
+                    android:textColor="@color/black"
+                    android:padding="@dimen/padding_material_8dp"
+                    android:gravity="center"
+                    />
+            </androidx.cardview.widget.CardView>
+
+        <!--Recycler view danh sach cac mau mong-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_model"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#E6FFFFFF"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_model1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#E6FFFFFF"
+            android:visibility="gone"
+            />
 
             <!--Thanh Tien mat, khuyen mai, ghi chu-->
             <TextView
@@ -595,15 +627,20 @@
             android:visibility="gone"
             >
 
-            <TextView
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/not_pink"
-                android:text="@string/text_dat_tho_thanh_cong"
-                android:textColor="@color/black"
-                android:padding="@dimen/padding_material_8dp"
-                android:gravity="center"
-                />
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/not_pink"
+                    android:text="@string/text_dat_tho_thanh_cong"
+                    android:textColor="@color/black"
+                    android:padding="@dimen/padding_material_8dp"
+                    android:gravity="center"
+                    />
+            </androidx.cardview.widget.CardView>
             <TextView
                 android:id="@+id/text_linearBookSuccessful_location"
                 android:layout_width="match_parent"
@@ -682,15 +719,20 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <TextView
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/not_pink"
-                android:text="@string/text_thong_tin_tho"
-                android:textColor="@color/black"
-                android:padding="@dimen/padding_material_8dp"
-                android:gravity="center"
-                />
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/not_pink"
+                    android:text="@string/text_thong_tin_tho"
+                    android:textColor="@color/black"
+                    android:padding="@dimen/padding_material_8dp"
+                    android:gravity="center"
+                    />
+            </androidx.cardview.widget.CardView>
 
             <!-- linear show thong tin tho -->
             <LinearLayout
@@ -751,6 +793,7 @@
                     android:text="@string/text_goi_tho"
                     />
                 <ImageView
+                    android:id="@+id/imageView_linearBookSuccessful_threeDots"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_three_dots"
