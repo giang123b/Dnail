@@ -8,7 +8,7 @@ import android.os.Bundle;
 
 import com.example.dnail1.navigations.NavigationHost;
 
-public class MainActivity extends AppCompatActivity implements NavigationHost {
+public class MainActivity extends AppCompatActivity implements NavigationHost , SendData {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,5 +35,11 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
         }
 
         transaction.commit();
+    }
+
+    @Override
+    public void sendText(String msg) {
+        OTPFragment Obj = (OTPFragment) getSupportFragmentManager().findFragmentById(R.id.OTP_fragment);
+//        Obj.onFragmentInteraction("aaaaaaaaaaaaaaaaa");
     }
 }

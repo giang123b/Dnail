@@ -264,7 +264,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             public void onClick(View view) {
                 linear_chooseTime.setVisibility(linear_chooseTime.GONE);
                 btnSearchWoker.setVisibility(btnSearchWoker.VISIBLE);
-//                btnSearchWoker.setText(R.string.text_tim_tho_mong);
                 btnOK.setVisibility(btnOK.GONE);
             }
         });
@@ -274,7 +273,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
             public void onClick(View view) {
                 txtSearchingWorker.setVisibility(txtSearchingWorker.VISIBLE);
                 btnSearchWoker.setText(R.string.text_huy);
-                btnOK.setVisibility(btnOK.GONE);
                 timeCountDown();
             }
         });
@@ -721,6 +719,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                 txtSearchingWorker.setVisibility(txtSearchingWorker.GONE);
                 btnSearchWoker.setVisibility(btnSearchWoker.GONE);
                 linear_selectModel.setVisibility(linear_selectModel.VISIBLE);
+                btnSearchWoker.setText(R.string.text_tim_tho_mong);
+                button_linearModel_bookWorker.setVisibility(button_linearModel_bookWorker.VISIBLE);
             }
         }.start();
     }
@@ -1058,6 +1058,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                 case R.id.refresh_worker:
                     linear_bookSuccessful.setVisibility(linear_bookSuccessful.GONE);
                     linear_time_locaion.setVisibility(linear_time_locaion.VISIBLE);
+                    btnSearchWoker.setVisibility(btnSearchWoker.VISIBLE);
                     return true;
                 default:
             }

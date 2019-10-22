@@ -52,7 +52,7 @@
             android:layout_marginLeft="16dp"
             >
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edt_phone"
+                android:id="@+id/editText_introFragment_phoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/textsize_sologan"
