@@ -8,8 +8,8 @@ import android.os.Bundle;
 
 import com.example.dnail1.navigations.NavigationHost;
 
-public class MainActivity extends AppCompatActivity implements NavigationHost , SendData {
-
+public class MainActivity extends AppCompatActivity implements NavigationHost {
+//  , IntroFragment.SendData
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,17 +29,41 @@ public class MainActivity extends AppCompatActivity implements NavigationHost , 
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.container, fragment);
-
-        if (addToBackstack) {
             transaction.addToBackStack(null);
-        }
 
         transaction.commit();
     }
 
-    @Override
-    public void sendText(String msg) {
-        OTPFragment Obj = (OTPFragment) getSupportFragmentManager().findFragmentById(R.id.OTP_fragment);
-//        Obj.onFragmentInteraction("aaaaaaaaaaaaaaaaa");
-    }
+//    @Override
+//    public void onMessageSend(String message) {
+//        OTPFragment otpFragment = new OTPFragment();
+//        Bundle bundle = new Bundle();
+//        bundle.putString("phoneNumber", message);
+//        otpFragment.setArguments(bundle);
+//
+//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction().
+//        replace(R.id.container, otpFragment, null);
+//        fragmentTransaction.addToBackStack(null);
+//        fragmentTransaction.commit();
+//    }
+
+//    @Override
+//    public void sendData(String message) {
+//        String tag = "android:switcher:" + R.id.OTP_fragment + ":" + 1;
+//        OTPFragment f = (OTPFragment) getSupportFragmentManager().findFragmentByTag(tag);
+//        f.displayReceivedData(message);
+//    }
+
+//    @Override
+//    public void sendText(String phoneNumber) {
+//        OTPFragment otpFragment = new OTPFragment();
+//        Bundle bundle = new Bundle();
+//        bundle.putString("phoneNumber", phoneNumber);
+//        otpFragment.setArguments(bundle);
+//
+//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction().
+//                replace(R.id.container, otpFragment, null);
+//        fragmentTransaction.addToBackStack(null);
+//        fragmentTransaction.commit();
+//    }
 }

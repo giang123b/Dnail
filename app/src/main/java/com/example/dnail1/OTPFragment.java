@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -34,6 +35,11 @@ public class OTPFragment extends Fragment {
         timeCountDown();
         addControls(root);
         addEvents();
+
+//        Bundle bundle = getArguments();
+//        String phoneNumber = bundle.getString("phoneNumber");
+//
+//        text_otpFragment_phoneNumber.setText("+84" + Integer.parseInt(phoneNumber));
 
         return root;
     }
@@ -72,8 +78,13 @@ public class OTPFragment extends Fragment {
         text_otpFragment_phoneNumber = root.findViewById(R.id.text_otpFragment_phoneNumber);
     }
 
-    public void onFragmentInteraction(String uri) {
-        Log.d("sai",uri);
-        text_otpFragment_phoneNumber.setText(uri);
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+////        text_otpFragment_phoneNumber.setText("");
+//    }
+//    protected void displayReceivedData(String message)
+//    {
+//        text_otpFragment_phoneNumber.setText("+84" + Integer.parseInt(message));
+//    }
 }

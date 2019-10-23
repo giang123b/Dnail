@@ -1,6 +1,7 @@
 package com.example.dnail1;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dnail1.navigations.NavigationHost;
 
@@ -23,8 +25,18 @@ public class IntroFragment extends Fragment {
     Button btn_next;
 //    TextView text_otpFragment_phoneNumber;
 
-    // send phone number
-    SendData sendData;
+//    OnMessageSendListener messageSendListener;
+//
+//    public interface OnMessageSendListener {
+//        public void onMessageSend(String message);
+//    }
+//
+//    interface SendMessage {
+//        void sendData(String message);
+//    }
+//
+//    SendMessage SM;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,20 +54,19 @@ public class IntroFragment extends Fragment {
             public void onClick(View view) {
                 if (!isPhoneValid(editText_introFragment_phoneNumber.getText())) {
                     editText_introFragment_phoneNumber.setError(getString(R.string.text_sdt_khong_dung));
-//                    Toast.makeText(getActivity(), getString(R.string.text_sdt_khong_dung), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getString(R.string.text_sdt_khong_dung), Toast.LENGTH_SHORT).show();
                 } else {
+//                    String phoneNumber = editText_introFragment_phoneNumber.getText().toString();
+//                    SM.sendData(phoneNumber);
+
                     editText_introFragment_phoneNumber.setError(null); // Clear the error
                     ((NavigationHost) getActivity()).navigateTo(new OTPFragment(), false); // Navigate to the next Fragment
-//
-//                    Editable phone = editText_introFragment_phoneNumber.getText();
-//                    text_otpFragment_phoneNumber.setText( "+8333333334");
+//                    ((NavigationHost) getActivity()).navigateTo(new TransactionDetailsFragment(), false); // Navigate to the next Fragment
 
-                    String phoneNumber = editText_introFragment_phoneNumber.getText().toString();
-                    sendData.sendText(phoneNumber);
                 }
             }
         });
-        
+
     }
 
 
@@ -70,13 +81,28 @@ public class IntroFragment extends Fragment {
     }
 
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            sendData = (SendData) getActivity();
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement onButtonPressed");
-        }
-    }
+//    @Override
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//
+//        Activity activity = (Activity) context;
+//
+//        try {
+//            messageSendListener = (OnMessageSendListener) activity;
+//        } catch (ClassCastException e) {
+//            throw new ClassCastException(activity.toString() + " must implement onMessageSend ....");
+//        }
+//    }
+//
+//    @Override
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//
+//        try {
+//            SM = (SendMessage) getActivity();
+//        } catch (ClassCastException e) {
+//            throw new ClassCastException("Error in retrieving data. Please try again");
+//        }
+//
+//    }
 }

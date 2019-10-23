@@ -256,6 +256,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                 linear_selectModel.setVisibility(linear_selectModel.GONE);
 
                 button_linearSearchLocation_ok.setVisibility(button_linearSearchLocation_ok.GONE);
+
+                Calendar calendar = Calendar.getInstance();
+
+                SimpleDateFormat simpleDateFormatDay = new SimpleDateFormat("dd/MM");
+
+                text_linearTimeLocation_enterTime.setText(simpleDateFormatDay.format(calendar.getTime()));
             }
         });
 
