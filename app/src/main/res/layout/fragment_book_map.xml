@@ -21,8 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="12dp"
-            android:padding="0dp"
             app:title="@string/app_name" />
+
 <!--        android:layout_height="?attr/actionBarSize" -->
 
         <com.google.android.material.tabs.TabLayout
@@ -32,7 +32,6 @@
             android:background="?attr/colorPrimary"
             app:tabIndicatorColor="@color/white"
             app:tabSelectedTextColor="@color/white"
-            android:padding="0dp"
             />
 
         <androidx.viewpager.widget.ViewPager

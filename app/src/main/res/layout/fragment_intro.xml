@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/intro_fragment"
-    android:background="@color/not_white"
+    android:background="@color/white"
     tools:context=".IntroFragment">
 
     <ImageView
@@ -58,7 +58,7 @@
                 android:textSize="@dimen/textsize_sologan"
                 android:layout_gravity="center|bottom"
                 android:inputType="number"
-                android:drawableLeft="@drawable/ic_telephone"
+                android:drawableLeft="@drawable/ic_phone_android_black_24dp"
                 />
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>

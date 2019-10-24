@@ -59,9 +59,9 @@ public class IntroFragment extends Fragment {
 //                    String phoneNumber = editText_introFragment_phoneNumber.getText().toString();
 //                    SM.sendData(phoneNumber);
 
-                    editText_introFragment_phoneNumber.setError(null); // Clear the error
+//                    editText_introFragment_phoneNumber.setError(null); // Clear the error
                     ((NavigationHost) getActivity()).navigateTo(new OTPFragment(), false); // Navigate to the next Fragment
-//                    ((NavigationHost) getActivity()).navigateTo(new TransactionDetailsFragment(), false); // Navigate to the next Fragment
+//                    ((NavigationHost) getActivity()).navigateTo(new PromotionFragment(), false); // Navigate to the next Fragment
 
                 }
             }

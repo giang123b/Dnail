@@ -2,10 +2,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:id="@+id/layout_personalInformation"
+    android:background="@color/not_white"
+    android:id="@+id/layout_promotion"
     >
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -30,64 +29,63 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/text_thong_tin_ca_nhan"
+                    android:text="@string/text_khuyen_mai"
                     android:textSize="30sp"
                     android:gravity="center"
                     />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/padding_material_8dp"
+            android:layout_margin="@dimen/padding_material_8dp"
             >
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_gravity="left"
-                android:src="@drawable/ic_avatar"
-                />
             <LinearLayout
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 >
 
                 <TextView
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="@string/text_do_truong_giang" />
-                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="giangghj@gmail.com"
-                    android:layout_marginLeft="10dp"
+                    android:layout_height="match_parent"
+                    android:text="#dnailKM01 - Ưu đãi 50%..."
+                    android:textSize="30dp"
+                    android:textColor="@color/black"
+                    android:gravity="center"
                     />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="0356865077"
-                    android:layout_marginLeft="10dp"
+                    android:text="Hạn sử dụng đến 21/12/2019"
+                    android:textSize="25sp"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="@dimen/padding_material_8dp"
+                    android:gravity="center"
                     />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Dnail tặng quý khánh ưu đãi 50% (Tối đa 20.000 đ) x 2 lần làm  móng/1 tuần"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="@dimen/padding_material_8dp"
+
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_luu_y"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="@dimen/padding_material_8dp"
+                    />
+
             </LinearLayout>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_edit_black_24dp"
-                />
-        </LinearLayout>
-    </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-    <com.google.android.material.button.MaterialButton
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/text_dang_xuat"
-        android:layout_gravity="bottom"
-        android:layout_margin="@dimen/padding_material_8dp"
-        />
+    </LinearLayout>
 </FrameLayout>

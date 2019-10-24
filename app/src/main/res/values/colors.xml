@@ -8,7 +8,7 @@
     <color name="pink_theme">#fd718b</color>
     <color name="sliver">#A0A0A0</color>
     <color name="white">#ffff</color>
-    <color name="not_white">#F8F7F7</color>
+    <color name="not_white">#DAD7D7</color>
     <color name="textColorPrimary">#442C2E</color>
     <color name="toolbarIconColor">@color/textColorPrimary</color>
     <color name="loginPageBackgroundColor">#FFFFFF</color>
